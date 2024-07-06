@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/06 03:55:42 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/06 04:26:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,6 @@ int	minishell(int exit_code, char **envp, char *input, char *line)
 	return (exit_code);
 }
 
-/*
-- signals
-- errors (whitespace, proc_exit_val)
-- initialize mini struct
-- copy envs
-- lexer
-- parser
-- executor
-*/
-
 int	main(int argc, char **argv, char **envp)
 {
 	int			exit_code;
@@ -95,9 +85,3 @@ int	main(int argc, char **argv, char **envp)
 		exit_code = exit_code + 500;
 	return (exit_code);
 }
-
-/*
-args error
-env dup
-main process loop
-*/

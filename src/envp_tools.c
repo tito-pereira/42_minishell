@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/06 03:57:33 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/06 04:05:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*set_shlvl(char *envp)
 	return (envp_copy);
 }
 
-/* Makes a copy of the original envp */
+/* Initial envp original copy made at the start */
 char	**envp_dup(char **envp, int i)
 {
 	int		val;
