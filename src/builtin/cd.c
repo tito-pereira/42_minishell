@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:04 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/07 23:08:21 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/08 16:53:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	set_dir(char *dir, char ***envp)
 	}
 	else
 	{
-		//printf("Directory changed\n\n\n");
 		var[1] = ft_strjoin ("OLDPWD=", temp);
 		ft_export (var, envp);
 		temp = free_str(temp);
@@ -50,11 +49,6 @@ static char	*get_home(char **envp)
 
 	while (envp && ft_strncmp (*envp, "HOME=", 5))
 		envp++;
-	/*if (!ft_strncmp (*envp, "HOME=", 5)) //
-	{
-		ft_printf("Home not found.\n");
-		return (NULL);
-	}*/
 	home = *envp + 5;
 	return (home);
 }
@@ -67,16 +61,7 @@ int	ft_cd(char **cmd, char ***envp)
 	if (cmd[1] && !cmd[2])
 		ret = set_dir (cmd[1], envp);
 	else if (!cmd[1])
-	{
-	/*
-		if (!get_home)
-		{
-			ft_printf("Home not found.\n");
-			return (1);
-		}
-	*/
 		ret = set_dir (get_home (*envp), envp);
-	}
 	else
 	{
 		ft_printf("minishell >> : cd: invalid usage\n", 2);
@@ -84,13 +69,5 @@ int	ft_cd(char **cmd, char ***envp)
 	}
 	if (ret == 1)
 		return (1);
-	//print_db_char(envp[0]);
 	return (0);
 }
-
-/*
-	cd (V)
-		exit_code -> cd_error_checker
-		cd_error_checker, exit_code = 1 (HOME not set, too many args)
-		update_dir, file_err = strerror(errno);
-*/

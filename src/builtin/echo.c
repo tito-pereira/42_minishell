@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:08 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/08 00:59:08 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/08 16:54:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,35 +51,3 @@ void	ft_echo(char **cmd)
 	if (newline)
 		ft_printf("\n");
 }
-
-/*
-old
-
-void	ft_echo(char **cmd)
-{
-	int newline;
-	int i;
-	int j;
-
-	newline = 1;
-	i = 1;
-	while (cmd && cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
-	{
-		j = 2;
-		while (cmd[i][j] == 'n')
-			j++;
-		if (cmd[i][j] != '\0')
-			break;
-		newline = 0;
-		i++;
-	}
-	while (cmd[i])
-	{
-		ft_printf("%s", cmd[i]);
-		if (cmd[++i])
-			ft_putchar_fd(' ', 1);
-	}
-	if (newline)
-		ft_printf("\n");
-}
-*/

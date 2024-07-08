@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:15 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/07 23:03:57 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/08 16:55:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,13 @@ static int	get_var_pos(char *var, char **envp)
 static void	update_var(char *var, int var_pos, char ***envp)
 {
 	char	**envp_temp;
-	//int i;
 
-	//printf("var_pos = %d\n", var_pos);
 	if (!envp[0][var_pos])
 	{
 		envp_temp = ft_calloc (var_pos + 2, sizeof (char *));
 		envp_temp[var_pos] = ft_strdup (var);
-		//ft_printf("envp_temp = %s\n", envp_temp[var_pos]);
 		while (var_pos--)
-		{
 			envp_temp[var_pos] = ft_strdup (envp[0][var_pos]);
-			//ft_printf("envp_temp = %s\n", envp_temp[var_pos]);
-		}
 		*envp = free_db_str(*envp); 
 		*envp = envp_temp;
 	}
@@ -54,12 +48,6 @@ static void	update_var(char *var, int var_pos, char ***envp)
 		envp[0][var_pos] = free_str (envp[0][var_pos]);
 		envp[0][var_pos] = ft_strdup (var);
 	}
-	//i = -1;
-	//while(envp[0][++i])
-	//{
-		//ft_printf("envp[i] = %s\n", envp[0][i]);
-		//printf("i = %d\n", i);
-	//}
 }
 
 static int	valid_var(char *var)
@@ -87,7 +75,6 @@ int	ft_export(char **cmd, char ***envp)
 	int	i;
 	int	var_pos;
 
-	//printf("INSIDE EXPORT:\n");
 	i = 1;
 	if (!cmd[1])
 		ft_env(cmd, envp);
@@ -95,35 +82,15 @@ int	ft_export(char **cmd, char ***envp)
 	{
 		if (valid_var (cmd[i]) && ft_strchr (cmd[i], '='))
 		{
-			printf("olaaaa\n\n\n\n");
 			var_pos = get_var_pos (cmd[i], *envp);
 			update_var (cmd[i], var_pos, envp);
 		}
 		else if (!valid_var (cmd[i]))
 		{
-			printf("frwjifrjw\n\n\n");
 			ft_printf("minishell >> : export : %s : is not valid\n", cmd[i]);
-			//*err = 1;
 			return (1);
 		}	
 		i++;
 	}
 	return (0);
 }
-
-/*
-tem q retornar 0 if success ou 1 if error
-
-	export
-		export, exit_code -> export_new
-		export_new, exit_code -> export_error_checker
-		export_error_checker, if ('=': not a valid identifier), exit_code = 1
-
-- export (1)
-	('=': not a valid identifier), exit_code = 1
-
-	Valid Identifier Rules:
-- begin with a letter or underscore (_)
-- all characters can be letters, digits, or underscores.
-- cannot contain spaces / special characters such as =, @, !, etc., except for _.
-*/
