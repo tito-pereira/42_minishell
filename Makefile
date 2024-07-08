@@ -5,107 +5,75 @@
 #                                                     +:+ +:+         +:+      #
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/18 17:44:21 by marvin            #+#    #+#              #
-#    Updated: 2024/07/06 03:21:02 by marvin           ###   ########.fr        #
+#    Created: 2024/03/18 17:44:12 by marvin            #+#    #+#              #
+#    Updated: 2024/06/28 17:31:15 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+# Name && Utilities
+NAME= minishell
+RM= rm -rf
 
-RESET	= \033[0m
-BOLD	= \033[1m
-FAINT	= \033[2m
-ITALIC	= \033[3m
-ULINE	= \033[4m
-SBLINK	= \033[5m
-FBLINK	= \033[6m
-REVCOL	= \033[7m
-HIDDEN	= \033[8m
-CROSS	= \033[9m
-BLACK   = \033[1;30m
-RED     = \033[1;31m
-GREEN   = \033[1;32m
-YELLOW  = \033[1;33m
-BLUE    = \033[1;34m
-PURPLE  = \033[1;35m
-CYAN    = \033[1;36m
-WHITE   = \033[1;37m
+# Compiler && Flags
+CC= cc
+CFLAGS= -Wall -Wextra -Werror
 
-SRCS_DIR		= src
+# Source && Object Files
+SRC_P= ./src/parser/p_1.c ./src/parser/p_1a.c \
+	./src/parser/p_2.c ./src/parser/p_2a.c ./src/parser/p_2b.c \
+	./src/parser/p_2c.c \
+	./src/parser/p_3.c ./src/parser/p_3a.c ./src/parser/p_3b.c \
+	./src/parser/p_4.c \
+	./src/parser/p_5.c ./src/parser/p_5a.c \
+	./src/parser/p_6.c ./src/parser/p_6a.c
+OBJ_P= ${SRC_P:.c=.o}
 
-OBJS_DIR		= objs
+SRC_E= ./src/executor/e_main.c ./src/executor/e_loop.c \
+	./src/executor/e_action.c ./src/executor/e_close.c \
+	./src/executor/e_outf.c ./src/executor/e_pipe.c \
+	./src/executor/e_envs.c ./src/executor/e_redirs.c
+OBJ_E= ${SRC_E:.c=.o}
 
-INCLUDES		= includes
-LIBFT			= ./libs/libft/libft.a
-LIBFT_DIR		= ./libs/libft
+SRC_B= ./src/builtin/blt_central.c ./src/builtin/cd.c \
+	./src/builtin/echo.c ./src/builtin/env.c \
+	./src/builtin/export.c \
+	./src/builtin/pwd.c ./src/builtin/unset.c #./src/builtin/exit.c
+OBJ_B= ${SRC_B:.c=.o}
 
-CC				= cc
-CFLAGS			= -Wall -Wextra -Werror -g 
-RM				= rm -rf
+SRC_M= ./src/free.c ./src/signals.c ./src/main.c \
+	./src/prints.c ./src/exit_mini.c
+OBJ_M= ${SRC_M:.c=.o}
 
-SRCS			= 	minishell.c \
-					minishell_utils.c \
-					structs_init.c \
-					lexer/lexer_main.c \
-					lexer/lexer_split.c \
-					lexer/lexer_split_utils.c \
-					lexer/lexer_elements.c \
-					lexer/lexer_quotes_checker.c \
-					expander/expander.c \
-					expander/eof_handler.c \
-					expander/macros_tools.c \
-					parser/parser_main.c \
-					parser/parser_main_utils.c \
-					parser/parser_cmd.c \
-					parser/parser_utils.c \
-					executer/executer_heredoc_expander.c \
-					executer/executer_main.c \
-					executer/executer_utils_1.c \
-					executer/executer_utils_2.c \
-					executer/executer_utils_3.c \
-					executer/executer_single_cmd.c \
-					executer/executer_multi_cmds.c \
-					executer/executer_multi_redirs.c \
-					executer/executer_multi_utils.c \
-					executer/executer_redirs_utils.c \
-					builtins/cd.c \
-					builtins/cd_utils.c \
-					builtins/env_main.c \
-					builtins/env.c \
-					builtins/exit_shell.c \
-					builtins/echo.c \
-					builtins/export.c \
-					builtins/export_utils_1.c \
-					builtins/export_utils_2.c \
-					builtins/unset.c \
-					builtins/pwd.c \
-					builtins/new_var_set.c \
-					signals.c \
-					free_mem.c \
-					error_1.c \
-					error_2.c \
-					print_utils.c \
-					envp_tools.c
+OBJ= $(OBJ_P) $(OBJ_E) $(OBJ_B) $(OBJ_M)
 
-# Substitute .c with .o 
-OBJS			= $(SRCS:%.c=$(OBJS_DIR)/%.o)
+# Include Libraries
+LIB_FT= -L./mylib -lft
+LIB_READ= -lreadline #-L/usr/lib/x86_64-linux-gnu
+LIBS= $(LIB_FT) $(LIB_READ)
 
-#default target
+# Rules
+$(NAME): $(OBJ)
+	@cd ./mylib && make
+	@$(CC) -g -v $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
+
 all: $(NAME)
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
-	@echo "$(GREEN)./minishell executable is ready!$(RESET)"
+	@cd ./mylib && make all
 
-#create .o fies
-# $< first prerequisite aka .c; $@ output/target file aka .o
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	mkdir -p $(@D)
-	$(CC) -I $(INCLUDES) $(CFLAGS) -c $< -o $@
+clean:
+	@cd ./mylib && make clean
+	@$(RM) $(OBJ)
 
-$(LIBFT):
-	clear
-	@echo "$(YELLOW)Compiling necessary libs...$(RESET)"
-	$(MAKE) -C $(LIBFT_DIR)
+fclean:	clean
+	@cd ./mylib && make fclean
+	@$(RM) $(NAME)
+
+re: fclean all
+	@cd ./mylib && make re
+
+test: re
+	@make clean
+	@clear
+	@./$(NAME)
 
 #testing leaks
 leaks: leaks.supp
@@ -233,20 +201,3 @@ leaks.supp:
 	@echo "		obj:/usr/bin/clear" >> leaks.supp 
 	@echo "		fun:(below main)" >> leaks.supp
 	@echo "}" >> leaks.supp
-
-#remove .o files
-clean:
-	$(RM) $(OBJS_DIR)
-	$(MAKE) clean -C $(LIBFT_DIR)
-	@echo "$(RED)Object files have been deleted!$(RESET)"
-
-fclean: clean
-	$(RM) $(NAME) $(LIBFT) leaks.supp
-
-#reset environment - remove everything and recompile
-re: fclean
-	$(MAKE) all
-
-#targets declared as .PHONY will force the command even if there is a subdirectory or file with it's name
-.PHONY: all clean fclean re
-.SILENT:
