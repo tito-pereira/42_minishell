@@ -12,7 +12,9 @@
 
 #include "../minishell.h"
 
-void	check_mode_one(int mode)
+void	check_mode_one(int mode, struct sigaction sa_repeat, \
+	struct sigaction sa_ign, struct sigaction sa_hd_repeat, \
+	struct sigaction sa_global)
 {
 	if (mode == 1)
 	{
@@ -31,7 +33,8 @@ void	check_mode_one(int mode)
 	}
 }
 
-void	check_mode_two(int mode)
+void	check_mode_two(int mode, struct sigaction sa_dfl, \
+	struct sigaction sa_ign)
 {
 	if (mode == 4)
 	{
@@ -68,6 +71,6 @@ void	sig_handlerr(int mode)
 	sa_dfl.sa_handler = SIG_DFL;
 	sigemptyset(&sa_dfl.sa_mask);
 	sa_dfl.sa_flags = 0;
-	check_modes_one(mode);
-	check_modes_one(mode);
+	check_mode_one(mode, sa_repeat, sa_ign, sa_hd_repeat, sa_global);
+	check_mode_two(mode, sa_dfl, sa_ign);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:29:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 17:15:25 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:24:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,12 @@ int	open_all_redirs(t_execlist *execl)
 	{
 		if (execl->chunk[c]->infiles != NULL)
 		{
-			if (open_all_infs(execl->chunk[c], execl->exit_stt, execl) != 0)
+			if (open_all_infs(execl->chunk[c], execl) != 0)
 				return ((*execl->exit_stt));
 		}
 		if (execl->chunk[c]->outfiles != NULL)
 		{
-			if (open_all_outfs(execl->chunk[c], execl->exit_stt, execl) != 0)
+			if (open_all_outfs(execl->chunk[c], execl) != 0)
 				return ((*execl->exit_stt));
 		}
 	}

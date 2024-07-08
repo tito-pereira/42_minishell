@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/08 16:20:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:29:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	parse_central(t_execlist **execl, char *input, int *exit_stt, char ***env)
 	return (flag);
 }
 
+/*
 int	parser_success(t_execlist *execl, char *input, int *exit_stt, char **env)
 {
 	if (parse_central(&execl, input, &exit_stt, &env) == 1)
@@ -104,7 +105,7 @@ int	parser_success(t_execlist *execl, char *input, int *exit_stt, char **env)
 		}
 	}
 	return (1);
-}
+}*/
 
 int	main(void)
 {

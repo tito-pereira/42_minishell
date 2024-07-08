@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:35:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 16:50:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:22:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,16 @@ int	check_builtin(char *arg)
 	return (0);
 }
 
-void	check_p6_error(int r)
+int	check_p6_error(t_execlist *execl, int i, int r)
 {
 	if (r == 0)
 	{
 		ft_printf("%s: invalid command\n", \
 		execl->chunk[i]->cmd_n_args[0]);
 		*(execl->exit_stt) = 127;
-		return(0);
+		return (0);
 	}
+	return (1);
 }
 
 int	arg_id(t_execlist *execl)
@@ -75,7 +76,8 @@ int	arg_id(t_execlist *execl)
 				r = chunk_id(execl->chunk[i], 1);
 			else if (execl->chunk[i]->blt == 0)
 				r = chunk_id(execl->chunk[i], 2);
-			check_p6_error(r);
+			if (check_p6_error(execl, i, r) == 0)
+				return (0);
 		}
 	}
 	return(1);
