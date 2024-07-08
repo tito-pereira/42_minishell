@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/08 16:04:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/08 17:31:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_execlist {
 // PRINTS
 void	print_db_char(char **str);
 void	print_db(char **str);
-void	support_print(t_execlist *execl, int c);
+//void	support_print(t_execlist *execl, int c);
 void	get_exit_code(int status, int *exit_code);
 
 // SIGNAL HANDLING
