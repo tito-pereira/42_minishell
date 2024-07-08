@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/08 17:29:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/08 18:00:37 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	parse_central(t_execlist **execl, char *input, int *exit_stt, char ***env)
 		flag = arg_separator(*execl);
 	if (flag == 1)
 		flag = arg_id(*execl);
+	//printf("exit p-main with %d\n", *exit_stt);
 	return (flag);
 }
 
@@ -142,7 +143,7 @@ int	main(void)
 		{
 			if (execl)
 			{
-				env = *(execl->my_envp);
+				//env = *(execl->my_envp);
 				free_exec(execl, 1);
 			}
 			continue ;

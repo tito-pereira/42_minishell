@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:15 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/08 16:55:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/08 18:35:22 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_export(char **cmd, char ***envp)
 		}
 		else if (!valid_var (cmd[i]))
 		{
-			ft_printf("minishell >> : export : %s : is not valid\n", cmd[i]);
+			ft_printf("minishell: export: %s: is not valid\n", cmd[i]);
 			return (1);
 		}	
 		i++;
