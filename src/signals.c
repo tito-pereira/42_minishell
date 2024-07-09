@@ -13,8 +13,7 @@
 #include "../minishell.h"
 
 void	check_mode_one(int mode, struct sigaction sa_repeat, \
-	struct sigaction sa_ign, struct sigaction sa_hd_repeat, \
-	struct sigaction sa_global)
+	struct sigaction sa_ign, struct sigaction sa_hd_repeat)
 {
 	if (mode == 1)
 	{
@@ -26,17 +25,17 @@ void	check_mode_one(int mode, struct sigaction sa_repeat, \
 		sigaction(SIGINT, &sa_hd_repeat, NULL);
 		sigaction(SIGQUIT, &sa_ign, NULL);
 	}
-	else if (mode == 3)
+}
+
+void	check_mode_two(int mode, struct sigaction sa_dfl, \
+	struct sigaction sa_ign, struct sigaction sa_global)
+{
+	if (mode == 3)
 	{
 		sigaction(SIGINT, &sa_global, NULL);
 		sigaction(SIGQUIT, &sa_global, NULL);
 	}
-}
-
-void	check_mode_two(int mode, struct sigaction sa_dfl, \
-	struct sigaction sa_ign)
-{
-	if (mode == 4)
+	else if (mode == 4)
 	{
 		sigaction(SIGINT, &sa_dfl, NULL);
 		sigaction(SIGQUIT, &sa_dfl, NULL);
@@ -71,6 +70,6 @@ void	sig_handlerr(int mode)
 	sa_dfl.sa_handler = SIG_DFL;
 	sigemptyset(&sa_dfl.sa_mask);
 	sa_dfl.sa_flags = 0;
-	check_mode_one(mode, sa_repeat, sa_ign, sa_hd_repeat, sa_global);
-	check_mode_two(mode, sa_dfl, sa_ign);
+	check_mode_one(mode, sa_repeat, sa_ign, sa_hd_repeat);
+	check_mode_two(mode, sa_dfl, sa_ign, sa_global);
 }

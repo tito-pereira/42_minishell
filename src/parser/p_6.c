@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:35:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 17:22:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 02:24:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	arg_id(t_execlist *execl)
 			execl->chunk[i]->inpipe = 1;
 		if (check_absolute(execl->chunk[i]) == 0)
 		{
-			execl->chunk[i]->blt = check_builtin(execl->chunk[i]->cmd_n_args[0]);
+			execl->chunk[i]->blt = \
+			check_builtin(execl->chunk[i]->cmd_n_args[0]);
 			if (execl->chunk[i]->blt == 1)
 				r = chunk_id(execl->chunk[i], 1);
 			else if (execl->chunk[i]->blt == 0)
