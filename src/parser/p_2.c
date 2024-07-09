@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:34 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/08 16:26:10 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 05:42:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_redir(t_execlist *execl, int *i, int c, int flag)
 	ret = 0;
 	if (flag == 0 && execl->chunk[c]->og[*i] == '<')
 	{
-		ret = input_redir(execl->chunk[c], *i, nwe, execl, c);
+		ret = input_redir(*i, nwe, execl, c);
 		if (ret == -1 || ret == 130)
 		{
 			get_error_msg(execl, ret);
@@ -61,7 +61,7 @@ int	check_redir(t_execlist *execl, int *i, int c, int flag)
 	}
 	else if (flag == 0 && execl->chunk[c]->og[*i] == '>')
 	{
-		if (output_redir(execl->chunk[c], *i, nwe, execl, c) == -1)
+		if (output_redir(*i, nwe, execl, c) == -1)
 		{
 			get_error_msg(execl, -1);
 			return (0);
@@ -98,14 +98,15 @@ int	redir_checker(t_execlist *execl)
 		i = -1;
 		while (execl->chunk[c]->og[++i] != '\0')
 		{
-			if (execl->chunk[c]->og[i] == 34 && flag == 0)
+			/*if (execl->chunk[c]->og[i] == 34 && flag == 0)
 				flag = 34;
 			else if (execl->chunk[c]->og[i] == 34 && flag == 34)
 				flag = 0;
 			else if (execl->chunk[c]->og[i] == 39 && flag == 0)
 				flag = 39;
 			else if (execl->chunk[c]->og[i] == 39 && flag == 39)
-				flag = 0;
+				flag = 0;*/
+			parser_quote_flags(execl->chunk[c]->og[i], &flag);
 			if (check_redir(execl, &i, c, flag) == 0)
 				return (0);
 		}

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:52:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/09 02:17:55 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 05:14:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	pipe_counter(char *input, t_execlist *execl)
 	if (pipe_cnt_loop(execl, input, 0, &c) == -1)
 		return (-1);
 	execl->pipe_loc = malloc((execl->valid_cmds + 1) * sizeof(int));
-	i = -1;
-	pipe_atr_loop(execl, input, 0, i);
+	//i = -1;
+	pipe_atr_loop(execl, input, 0, -1);
 	return (c);
 }

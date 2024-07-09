@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/09 01:20:28 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 05:21:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,8 @@ int		arg_id(t_execlist *execl);
 
 // PARSER SUPPORT
 int		pipe_counter(char *input, t_execlist *execl);
-int		input_redir(t_chunk *chunk, int i, char *nwe, t_execlist *execl, int c);
-int		output_redir(t_chunk *chunk, int i, char *nwe, \
-	t_execlist *execl, int c);
+int		input_redir(int i, char *nwe, t_execlist *execl, int c);
+int		output_redir(int i, char *nwe, t_execlist *execl, int c);
 char    *heredoc_read(char *lim);
 char	*new_chnk(char *spec, char *old, int a, int b);
 int		cmd_separator(t_chunk *chunk);

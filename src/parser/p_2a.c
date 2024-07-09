@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:40 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/08 16:31:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 05:24:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,16 @@ int	check_delim_error(t_execlist *execl, char *delim)
 	return (1);
 }
 
-int	input_redir(t_chunk *chunk, int i, char *nwe, t_execlist *execl, int c)
+int	input_redir(int i, char *nwe, t_execlist *execl, int c)
 {
 	i++;
-	if (chunk->og[i] == '<')
+	if (execl->chunk[c]->og[i] == '<')
 	{
-		chunk->heredoc = 1;
-		while ((chunk->og[++i] == 9 || chunk->og[i] == 32)
-			&& chunk->og[i] != '\0')
+		execl->chunk[c]->heredoc = 1;
+		while ((execl->chunk[c]->og[++i] == 9 || execl->chunk[c]->og[i] == 32)
+			&& execl->chunk[c]->og[i] != '\0')
 			continue ;
-		if (chunk->og[i] == '\0')
+		if (execl->chunk[c]->og[i] == '\0')
 		{
 			if (execl->chunk[c + 1])
 				(*execl->exit_stt) = 30;
@@ -135,48 +135,48 @@ int	input_redir(t_chunk *chunk, int i, char *nwe, t_execlist *execl, int c)
 				(*execl->exit_stt) = 20;
 			return (-1);
 		}
-		if (chunk->delimiter != NULL)
-			free(chunk->delimiter);
-		chunk->delimiter = get_name(chunk->og, i, execl, c);
-		if (chunk->delimiter == NULL
-			|| check_delim_error(execl, chunk->delimiter) == 0)
+		if (execl->chunk[c]->delimiter != NULL)
+			free(execl->chunk[c]->delimiter);
+		execl->chunk[c]->delimiter = get_name(execl->chunk[c]->og, i, execl, c);
+		if (execl->chunk[c]->delimiter == NULL
+			|| check_delim_error(execl, execl->chunk[c]->delimiter) == 0)
 			return (-1);
-		nwe = heredoc_read(chunk->delimiter);
+		nwe = heredoc_read(execl->chunk[c]->delimiter);
 		if (nwe == NULL)
 			return (130);
-		updt_rdr_lst(chunk, 0, 1, nwe);
+		updt_rdr_lst(execl->chunk[c], 0, 1, nwe);
 	}
-	else if (chunk->og[i] != '<')
+	else if (execl->chunk[c]->og[i] != '<')
 	{
-		chunk->heredoc = 0;
-		nwe = get_name(chunk->og, i, execl, c);
+		execl->chunk[c]->heredoc = 0;
+		nwe = get_name(execl->chunk[c]->og, i, execl, c);
 		if (nwe == NULL)
 			return (-1);
-		updt_rdr_lst(chunk, 0, 0, nwe);
+		updt_rdr_lst(execl->chunk[c], 0, 0, nwe);
 	}
 	return (1);
 }
 
-int	output_redir(t_chunk *chunk, int i, char *nwe, t_execlist *execl, int c)
+int	output_redir(int i, char *nwe, t_execlist *execl, int c)
 {
 	i++;
-	if(chunk->og[i] == '>')
+	if(execl->chunk[c]->og[i] == '>')
 	{
 		i++;
-		chunk->append = 1;
-		nwe = get_name(chunk->og, i, execl, c);
+		execl->chunk[c]->append = 1;
+		nwe = get_name(execl->chunk[c]->og, i, execl, c);
 		if (nwe == NULL)
 			return (-1);
-		updt_rdr_lst(chunk, 1, 1, nwe);
+		updt_rdr_lst(execl->chunk[c], 1, 1, nwe);
 		i--;
 	}
-	if (chunk->og[i] != '>')
+	if (execl->chunk[c]->og[i] != '>')
 	{
-		chunk->append = 0;
-		nwe = get_name(chunk->og, i, execl, c);
+		execl->chunk[c]->append = 0;
+		nwe = get_name(execl->chunk[c]->og, i, execl, c);
 		if (nwe == NULL)
 			return (-1);
-		updt_rdr_lst(chunk, 1, 0, nwe);
+		updt_rdr_lst(execl->chunk[c], 1, 0, nwe);
 	}
 	return(1);
 }
