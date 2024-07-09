@@ -6,52 +6,19 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:39:10 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 16:58:53 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 22:29:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void    write_heredoc(t_execlist *execl, char *str, int **fd, int i, int *nfd)
+void	input_end(int **fd, int **nfd, int i)
 {
-    int pid;
-
-	pid = fork();
-    if (pid == 0)
-    {
-		close_pipes(execl, fd, i, 1, 0);
-		close(nfd[0]);
-		write(nfd[1], str, ft_strlen(str));
-		close(nfd[1]);
-		exit(0);
-	}
-    wait(0);
-}
-
-void	write_infile(t_execlist *execl, char *str, int **fd, int i, int *nfd)
-{
-	int 	pid;
-	int		infile;
-	char	*shovel;
-
-	pid = fork();
-    if (pid == 0)
-    {
-		close_pipes(execl, fd, i, 1, 0);
-		close(nfd[0]);
-		infile = open(str, O_RDONLY);
-		shovel = get_next_line(infile);
-		while (shovel != NULL)
-		{
-			write(nfd[1], shovel, ft_strlen(shovel));
-			free(shovel);
-			shovel = get_next_line(infile);
-		}
-		close(infile);
-		close(nfd[1]);
-		exit(0);
-	}
-    wait(0);
+	close((*nfd)[0]);
+	close((*nfd)[1]);
+	free(*nfd);
+	close(fd[i][1]);
+	close(fd[i][0]);
 }
 
 void	exec_input(t_execlist *execl, int **fd, int i)
@@ -62,24 +29,20 @@ void	exec_input(t_execlist *execl, int **fd, int i)
 	n_file = execl->chunk[i]->nmb_inf;
 	nfd = (int *)ft_calloc(2, sizeof(int));
 	pipe(nfd);
-    close_pipes(execl, fd, i, 0, 1);
+    close_pipes(execl, fd, i, 2);
 	if (execl->chunk[i]->infiles && execl->chunk[i]->here_dcs[n_file] == 1 )
 	{
-        write_heredoc(execl, execl->chunk[i]->infiles[n_file], fd, i, nfd);
+        write_heredoc(execl, fd, i, nfd);
 		dup2(nfd[0], STDIN_FILENO);
 	}
     else if (execl->chunk[i]->infiles && execl->chunk[i]->here_dcs[n_file] == 0)
     {
-		write_infile(execl, execl->chunk[i]->infiles[n_file], fd, i, nfd);
+		write_infile(execl, fd, i, nfd);
 		dup2(nfd[0], STDIN_FILENO);
     }
 	else if (!execl->chunk[i]->infiles && i > 0)
         dup2(fd[i][0], STDIN_FILENO);
-    close(nfd[0]);
-	close(nfd[1]);
-	free(nfd);
-	close(fd[i][1]);
-	close(fd[i][0]);
+	input_end(fd, &nfd, i);
 }
 
 void	ex_redir_file(t_execlist *execl, int i)

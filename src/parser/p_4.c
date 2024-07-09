@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:12:29 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 16:41:26 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 22:18:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,7 @@ void	find_redirs(char *og, int *a, int *b, int *i)
 		(*i)++;
 	while (og[*i] != '\0')
 	{
-		if (og[*i] == 34 && flag == 0)
-			flag = 34;
-		else if (og[*i] == 34 && flag == 34)
-			flag = 0;
-		else if (og[*i] == 39 && flag == 0)
-			flag = 39;
-		else if (og[*i] == 39 && flag == 39)
-			flag = 0;
+		parser_quote_flags(og[*i], &flag);
 		if (flag == 0 && (og[*i] == 9 || og[*i] == 32))
 			break ;
 		(*i)++;
@@ -108,14 +101,7 @@ int	scope_redirs(t_execlist *execl)
 		i = -1;
 		while (execl->chunk[c]->og[++i] != '\0')
 		{
-			if (execl->chunk[c]->og[i] == 34 && flag == 0)
-				flag = 34;
-			else if (execl->chunk[c]->og[i] == 34 && flag == 34)
-				flag = 0;
-			else if (execl->chunk[c]->og[i] == 39 && flag == 0)
-				flag = 39;
-			else if (execl->chunk[c]->og[i] == 39 && flag == 39)
-				flag = 0;
+			parser_quote_flags(execl->chunk[c]->og[i], &flag);
 			if (flag == 0)
 				find_red_pos(execl->chunk[c], &i);
 		}

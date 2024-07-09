@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:45:01 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/08 16:47:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 15:00:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	non_white(int *a, int *b, t_chunk *chunk, int *i)
 		quote_handler(1, chunk->og[*i], &quote, &quotes);
 		(*i)++;
 	}
-	if (chunk->og[*i] == 9 || chunk->og[*i] == 32 || chunk->og[*i] == '\0' || (!quote && !quotes))
+	if (chunk->og[*i] == 9 || chunk->og[*i] == 32
+		|| chunk->og[*i] == '\0' || (!quote && !quotes))
 		*b = *i - 1;
 	return(1);
 }

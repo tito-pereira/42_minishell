@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:41:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 17:01:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 22:38:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,21 @@ char	**add_str(char **list, int *i)
 	return (new);
 }
 
+void	mng_env_list(char ***env_list, char *input, int *i)
+{
+	if (!(*env_list))
+	{
+		(*env_list) = (char **)malloc(2 * sizeof(char *));
+		(*env_list)[0] = ft_strdup(input);
+		(*env_list)[1] = NULL;
+	}
+	else
+	{
+		(*env_list) = add_str(*env_list, i);
+		(*env_list)[*i] = ft_strdup(input);
+	}
+}
+
 char	***read_from_pipe(int fd, t_execlist *execl)
 {
 	char	***n_env;
@@ -64,17 +79,7 @@ char	***read_from_pipe(int fd, t_execlist *execl)
 	while (input != NULL)
 	{
 		input = rmv_newline(input);
-		if (!env_list)
-		{
-			env_list = (char **)malloc(2 * sizeof(char *));
-			env_list[0] = ft_strdup(input);
-			env_list[1] = NULL;
-		}
-		else
-		{
-			env_list = add_str(env_list, &i);
-			env_list[i] = ft_strdup(input);
-		}
+		mng_env_list(&env_list, input, &i);
 		free(input);
 		input = get_next_line(fd);
 	}

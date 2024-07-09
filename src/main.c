@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/08 18:00:37 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/09 18:51:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,99 +14,47 @@
 
 int	g_sig;
 
-int	null_input(char *input)
+void	global_init(t_execlist **execl, int *exit_stt, char ***env)
 {
-	int	i;
+	g_sig = 0;
+	*execl = NULL;
+	*exit_stt = 0;
+	*env = create_envp();
+}
 
-	i = -1;
-	if (input[0] == '\0')
+int	mini_init(char **input, char ***env)
+{
+	g_sig = 128;
+	sig_handlerr(1);
+	if (ft_read(input, env) == 0)
 		return (0);
-	while (input[++i])
+	return (1);
+}
+
+void	mini_exit(t_execlist **execl)
+{
+	if (*execl && (*execl)->cmd_nmb == 1
+		&& ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "exit", 10) == 0)
+		ft_exit((*execl)->chunk[0]->cmd_n_args, *execl);
+	if (*execl)
+		free_exec(*execl, 1);
+}
+
+int	parser_success(t_execlist **execl, char ***env)
+{
+	(*(*execl)->exit_stt) = 0;
+	exec_main(*execl);
+	if ((*execl)->exit_stt && (*(*execl)->exit_stt) == 0)
+		*env = *((*execl)->my_envp);
+	else if ((*(*execl)->exit_stt) && (*(*execl)->exit_stt) != 0)
 	{
-		if (input[i] != ' ' && input[i] != '	')
-			return (1);
-	}
-	return (0);
-}
-
-int	ft_read(char **input, char ***env)
-{
-	*input = NULL;
-	while (1)
-	{
-		*input = readline(PROMPT);
-		if (*input == NULL)
-		{
-			free_db_str(*env);
-			ft_printf("exit\n");
-			exit(0);
-		}
-		if (*input != NULL && null_input(*input) == 0)
-			free(*input);
-		else if (*input != NULL && null_input(*input) == 1)
-		{
-			add_history(*input);
-			return (1);
-		}
-	}
-}
-
-char	**create_envp(void)
-{
-	char	**my_envp;
-	int		i;
-
-	i = 0;
-	while (__environ[i] != NULL)
-		i++;
-	my_envp = (char **)malloc((i + 1) * sizeof(char *));
-	i = -1;
-	while (__environ[++i] != NULL)
-		my_envp[i] = ft_strdup(__environ[i]);
-	my_envp[i] = NULL;
-	return(my_envp);
-}
-
-int	parse_central(t_execlist **execl, char *input, int *exit_stt, char ***env)
-{
-	int			flag;
-
-	flag = 1;
-	if (flag == 1)
-		flag = pipe_chunks(execl, input, exit_stt, env);
-	if (flag == 1)
-		flag = redir_checker(*execl);
-	if (flag == 1)
-		flag = special_char(*execl);
-	if (flag == 1)
-		flag = scope_redirs(*execl);
-	if (flag == 1)
-		flag = arg_separator(*execl);
-	if (flag == 1)
-		flag = arg_id(*execl);
-	//printf("exit p-main with %d\n", *exit_stt);
-	return (flag);
-}
-
-/*
-int	parser_success(t_execlist *execl, char *input, int *exit_stt, char **env)
-{
-	if (parse_central(&execl, input, &exit_stt, &env) == 1)
-	{
-		(*execl->exit_stt) = 0;
-		exec_main(execl);
-		if (execl->exit_stt && (*execl->exit_stt) == 0)
-			env = *(execl->my_envp);
-		else if ((*execl->exit_stt) && (*execl->exit_stt) != 0)
-		{
-			env = *(execl->my_envp);
-			if (execl)
-				free_exec(execl, 1);
-			return (0);
-		}
+		*env = *((*execl)->my_envp);
+		if (*execl)
+			free_exec(*execl, 1);
+		return (0);
 	}
 	return (1);
-}*/
+}
 
 int	main(void)
 {
@@ -115,46 +63,44 @@ int	main(void)
 	int				exit_stt;
 	char			**env;
 
-	exit_stt = 0;
-	g_sig = 0;
-	execl = NULL;
-	env = create_envp();
+	global_init(&execl, &exit_stt, &env);
 	while (1)
 	{
-		g_sig = 128;
-		sig_handlerr(1);
-		if (ft_read(&input, &env) == 0)
+		if (mini_init(&input, &env) == 0)
 			continue ;
 		if (parse_central(&execl, input, &exit_stt, &env) == 1)
 		{
-			(*execl->exit_stt) = 0;
-			exec_main(execl);
-			if (execl->exit_stt && (*execl->exit_stt) == 0)
-				env = *(execl->my_envp);
-			else if ((*execl->exit_stt) && (*execl->exit_stt) != 0)
-			{
-				env = *(execl->my_envp);
-				if (execl)
-					free_exec(execl, 1);
+			if (parser_success(&execl, &env) == 0)
 				continue ;
-			}
 		}
 		else
 		{
 			if (execl)
-			{
-				//env = *(execl->my_envp);
 				free_exec(execl, 1);
-			}
 			continue ;
 		}
-		if (execl && execl->cmd_nmb == 1
-			&& ft_strncmp(execl->chunk[0]->cmd_n_args[0], "exit", 10) == 0)
-			ft_exit(execl->chunk[0]->cmd_n_args, execl);
-		if (execl)
-			free_exec(execl, 1);
+		mini_exit(&execl);
 	}
 }
+
+/*
+global_init()
+mini_init()
+mini_exit()
+
+envs
+sera que preciso de igualar as envs caso o parser falhe?
+so preciso de igualar as envs caso elas mudem no executor acho eu, caso
+contrario env continua a apontar para o local correto
+
+exit stt, erros non breakable, quando dar reset?
+estar disponivel (non zero) para o parsing (p_3, $?)
+depois disso, pode voltar a zero para receber novos sinais e
+evitar dar falsas error flags no executor
+mas nunca ficar a zeros depois do executor senao perco o $?
+logo, dar reset a seguir ao p_3 parsing ter sido feito
+(acho q n faço nenhum exit_stt check no p4, p5 e p6)
+*/
 
 /*
 int	main(void)

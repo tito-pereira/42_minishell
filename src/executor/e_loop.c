@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:38:06 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 17:06:38 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 22:40:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	blt_action(t_execlist *execl, int **fd, int i, char ***exec_str)
 	n_file = execl->chunk[i]->nmb_outf;
 	tmp = 0;
 	ret = 0;
-	close_pipes(execl, fd, i, 0, 1);
+	close_pipes(execl, fd, i, 2);
 	if (execl->chunk[i]->outfiles)
 	{
 		if (execl->chunk[i]->app_dcs[n_file] == 1)
@@ -57,7 +57,7 @@ int	blt_action(t_execlist *execl, int **fd, int i, char ***exec_str)
 	}
 	else
 		ret = blt_central(execl, i, exec_str[i]);
-	close_pipes(execl, fd, i, 1, 0);
+	close_pipes(execl, fd, i, 1);
 	return (ret);
 }
 
@@ -127,7 +127,7 @@ int	exec_launch(t_execlist *execl, int **fd, int i, char ***exec_str)
 		exec_action(execl, fd, i, exec_str);
 	else
 	{
-		close_pipes(execl, fd, i, 1, 1);
+		close_pipes(execl, fd, i, 3);
 		waitpid(pid2, &status, 0);
 		get_exit_code(status, execl->exit_stt);
 		if ((i + 1) < execl->valid_cmds)
@@ -161,7 +161,7 @@ int	exec_loop(t_execlist *execl, int **fd, char ***exec_str)
 		exec_launch(execl, fd, i, exec_str);
 		exit(0);
 	}
-	close_pipes(execl, fd, i, 1, 1);
+	close_pipes(execl, fd, i, 3);
 	waitpid(pid, &status, 0);
 	get_exit_code(status, execl->exit_stt);
 	if (execl->valid_cmds == 1 && check_changes(execl->chunk[0]) == 1)
@@ -173,3 +173,7 @@ int	exec_loop(t_execlist *execl, int **fd, char ***exec_str)
 	}
 	return ((*execl->exit_stt));
 }
+
+/*
+e_loop - blt action, exec launch, exec loop
+*/

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:34 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/09 05:42:38 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/09 19:53:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,30 @@ void	get_error_msg(t_execlist *execl, int ret)
 	(*execl->exit_stt) = 1;
 }
 
+int	input_checker(int **i, char **nwe, t_execlist **execl, int c)
+{
+	int	ret;
+
+	ret = input_redir(**i, *nwe, *execl, c);
+	if (ret == -1 || ret == 130)
+	{
+		get_error_msg(*execl, ret);
+		return (0);
+	}
+	if ((*execl)->chunk[c]->og[**i + 1] == '<')
+		(**i)++;
+	return (1);
+}
+
 int	check_redir(t_execlist *execl, int *i, int c, int flag)
 {
 	char	*nwe;
-	int		ret;
 
 	nwe = NULL;
-	ret = 0;
 	if (flag == 0 && execl->chunk[c]->og[*i] == '<')
 	{
-		ret = input_redir(*i, nwe, execl, c);
-		if (ret == -1 || ret == 130)
-		{
-			get_error_msg(execl, ret);
+		if (input_checker(&i, &nwe, &execl, c) == 0)
 			return (0);
-		}
-		if (execl->chunk[c]->og[*i + 1] == '<')
-			(*i)++;
 	}
 	else if (flag == 0 && execl->chunk[c]->og[*i] == '>')
 	{
@@ -72,6 +79,23 @@ int	check_redir(t_execlist *execl, int *i, int c, int flag)
 	return (1);
 }
 
+void	chunk_init(t_execlist **execl, int c)
+{
+	(*execl)->chunk[c]->infiles = NULL;
+	(*execl)->chunk[c]->nmb_inf = -1;
+	(*execl)->chunk[c]->here_dcs = NULL;
+	(*execl)->chunk[c]->heredoc = 0;
+	(*execl)->chunk[c]->here_file = NULL;
+	(*execl)->chunk[c]->delimiter = NULL;
+	(*execl)->chunk[c]->outfiles = NULL;
+	(*execl)->chunk[c]->nmb_outf = -1;
+	(*execl)->chunk[c]->append = 0;
+	(*execl)->chunk[c]->app_dcs = NULL;
+	(*execl)->chunk[c]->inpipe = 0;
+	(*execl)->chunk[c]->path = NULL;
+	(*execl)->chunk[c]->cmd_n_args = NULL;
+}
+
 int	redir_checker(t_execlist *execl)
 {
 	int	i;
@@ -82,40 +106,16 @@ int	redir_checker(t_execlist *execl)
 	flag = 0;
 	while (execl->chunk[++c] != NULL)
 	{
-		execl->chunk[c]->infiles = NULL;
-		execl->chunk[c]->nmb_inf = -1;
-		execl->chunk[c]->here_dcs = NULL;
-		execl->chunk[c]->heredoc = 0;
-		execl->chunk[c]->here_file = NULL;
-		execl->chunk[c]->delimiter = NULL;
-		execl->chunk[c]->outfiles = NULL;
-		execl->chunk[c]->nmb_outf = -1;
-		execl->chunk[c]->append = 0;
-		execl->chunk[c]->app_dcs = NULL;
-		execl->chunk[c]->inpipe = 0;
-		execl->chunk[c]->path = NULL;
-		execl->chunk[c]->cmd_n_args = NULL;
+		chunk_init(&execl, c);
 		i = -1;
 		while (execl->chunk[c]->og[++i] != '\0')
 		{
-			/*if (execl->chunk[c]->og[i] == 34 && flag == 0)
-				flag = 34;
-			else if (execl->chunk[c]->og[i] == 34 && flag == 34)
-				flag = 0;
-			else if (execl->chunk[c]->og[i] == 39 && flag == 0)
-				flag = 39;
-			else if (execl->chunk[c]->og[i] == 39 && flag == 39)
-				flag = 0;*/
 			parser_quote_flags(execl->chunk[c]->og[i], &flag);
 			if (check_redir(execl, &i, c, flag) == 0)
 				return (0);
 		}
-		if (flag != 0)
-		{
-			ft_printf("minishell: unclosed quotes\n");
-			*(execl->exit_stt) = 1;
+		if (flag != 0 && unc_qts_err(&execl) == 0)
 			return (0);
-		}
 	}
 	return (1);
 }

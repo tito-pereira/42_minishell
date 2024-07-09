@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 17:44:12 by marvin            #+#    #+#              #
-#    Updated: 2024/07/08 17:23:23 by marvin           ###   ########.fr        #
+#    Updated: 2024/07/09 22:21:05 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS= -Wall -Wextra -Werror
 # Source && Object Files
 SRC_P= ./src/parser/p_1.c ./src/parser/p_1a.c \
 	./src/parser/p_2.c ./src/parser/p_2a.c ./src/parser/p_2b.c \
-	./src/parser/p_2c.c \
+	./src/parser/p_2c.c ./src/parser/p_2_utils.c \
 	./src/parser/p_3.c ./src/parser/p_3a.c ./src/parser/p_3b.c \
 	./src/parser/p_4.c \
 	./src/parser/p_5.c ./src/parser/p_5a.c \
@@ -30,7 +30,8 @@ OBJ_P= ${SRC_P:.c=.o}
 
 SRC_E= ./src/executor/e_main.c ./src/executor/e_loop.c \
 	./src/executor/e_action.c ./src/executor/e_close.c \
-	./src/executor/e_envs.c ./src/executor/e_redirs.c
+	./src/executor/e_envs.c ./src/executor/e_redirs.c \
+	./src/executor/e_utils.c
 OBJ_E= ${SRC_E:.c=.o}
 
 SRC_B= ./src/builtin/blt_central.c ./src/builtin/cd.c \
@@ -40,7 +41,8 @@ SRC_B= ./src/builtin/blt_central.c ./src/builtin/cd.c \
 OBJ_B= ${SRC_B:.c=.o}
 
 SRC_M= ./src/free.c ./src/signals.c ./src/main.c \
-	./src/prints.c ./src/exit_mini.c ./src/sighandlers.c
+	./src/prints.c ./src/exit_mini.c ./src/sighandlers.c \
+	./src/main_sup.c
 OBJ_M= ${SRC_M:.c=.o}
 
 OBJ= $(OBJ_P) $(OBJ_E) $(OBJ_B) $(OBJ_M)
