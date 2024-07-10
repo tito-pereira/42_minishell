@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:04 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/10 20:48:44 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 21:17:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,23 @@ int	set_dir(char *dir, char ***envp)
 	return (0);
 }
 
-static char	*get_home(char **envp)
+static char	*get_home(char **env)
 {
 	char	*home;
 	int		i;
 
 	i = 0;
-	while (envp[i] != NULL && ft_strncmp (*envp, "HOME=", 5))
+	while (env[i] != NULL)
+	{
+		if (env[i][0] && env[i][0] == 'H' && env[i][1] && env[i][1] == 'O'
+			&& env[i][2] && env[i][2] == 'M' && env[i][3] && env[i][3] == 'E'
+			&& env[i][4] && env[i][4] == '=' && env[i][5])
+			break ;
 		i++;
-	if (envp[i] == NULL)
+	}
+	if (env[i] == NULL)
 		return (NULL);
-	home = *envp + 5;
+	home = env[i] + 5;
 	return (home);
 }
 
@@ -194,6 +200,8 @@ void	cd(t_mshell *init, t_parser *parser, int *exit_code, char ***envp_copy)
 */
 
 /*
+HOME not set ta a dar problemas agr
+
 unistd
 getcwd() -> update olddir com getcwd()
 chdir() -> para actually change dir
