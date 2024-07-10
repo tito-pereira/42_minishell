@@ -37,7 +37,7 @@ int		get_name_errors(t_execlist *execl, char *str, int i)
 	{
 		if (str[i + 1] && str[i + 1] == '<')
 			(*execl->exit_stt) = 45;
-		else if (str[i + 1] && str[i + 1] != '<')
+		else if ((str[i + 1] && str[i + 1] != '<') || !str[i + 1])
 			(*execl->exit_stt) = 40;
 		return (0);
 	}
@@ -45,7 +45,7 @@ int		get_name_errors(t_execlist *execl, char *str, int i)
 	{
 		if (str[i + 1] && str[i + 1] == '>')
 			(*execl->exit_stt) = 55;
-		else if (str[i + 1] && str[i + 1] != '>')
+		else if ((str[i + 1] && str[i + 1] != '>') || !str[i + 1])
 			(*execl->exit_stt) = 50;
 		return (0);
 	}

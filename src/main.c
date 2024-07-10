@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/10 20:43:58 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 00:56:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ void	global_init(t_execlist **execl, int *exit_stt, char ***env)
 	*env = create_envp();
 }
 
-int	mini_init(char **input, char ***env)
+int	mini_init(char **input, char ***env, int *exit_stt)
 {
 	g_sig = 128;
 	sig_handlerr(1);
 	if (ft_read(input, env) == 0)
 		return (0);
+	if (g_sig == 130)
+		*exit_stt = 130;
 	return (1);
 }
 
@@ -35,18 +37,14 @@ void	mini_exit(t_execlist **execl)
 {
 	if (*execl && (*execl)->cmd_nmb == 1
 		&& ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "cd", 10) == 0)
-		(*(*execl)->exit_stt) = ft_cd((*execl)->chunk[0]->cmd_n_args, (*execl)->my_envp);
+		(*(*execl)->exit_stt) = ft_cd((*execl)->chunk[0]->cmd_n_args, \
+		(*execl)->my_envp);
 	if (*execl && (*execl)->cmd_nmb == 1
 		&& ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "exit", 10) == 0)
 		ft_exit((*execl)->chunk[0]->cmd_n_args, *execl);
 	if (*execl)
 		free_exec(*execl, 1);
 }
-
-/*
-- retirar o cd daqueles valid cmds do pipe intermedio
-- o cd so funciona sozinho num pipe ou pode haver mais cmds? (sozinho)
-*/
 
 int	parser_success(t_execlist **execl, char ***env)
 {
@@ -74,7 +72,7 @@ int	main(void)
 	global_init(&execl, &exit_stt, &env);
 	while (1)
 	{
-		if (mini_init(&input, &env) == 0)
+		if (mini_init(&input, &env, &exit_stt) == 0)
 			continue ;
 		if (parse_central(&execl, input, &exit_stt, &env) == 1)
 		{

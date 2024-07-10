@@ -49,6 +49,13 @@ int	ft_read(char **input, char ***env)
 	}
 }
 
+/*
+basicamente adicionar uma global check == 130 para ver se houve SIGINT
+mas eu acho que fica constantemente preso ali na readline nao?
+o sighandler apenas "adiciona" funcoes enquanto fica ali preso
+no heredoc por exemplo ele sai porque faz exit, mais facil
+*/
+
 char	**create_envp(void)
 {
 	char	**my_envp;
