@@ -6,11 +6,22 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:04 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/10 21:17:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 01:51:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	set_dir_sup(char ***var, char **temp, char ***envp)
+{
+	(*var)[1] = ft_strjoin ("OLDPWD=", *temp);
+	ft_export (*var, envp);
+	*temp = free_str(*temp);
+	(*var)[1] = free_str((*var)[1]);
+	*temp = getcwd (*temp, 4096);
+	(*var)[1] = ft_strjoin ("PWD=", *temp);
+	ft_export (*var, envp);
+}
 
 int	set_dir(char *dir, char ***envp)
 {
@@ -29,15 +40,7 @@ int	set_dir(char *dir, char ***envp)
 		return (1);
 	}
 	else
-	{
-		var[1] = ft_strjoin ("OLDPWD=", temp);
-		ft_export (var, envp);
-		temp = free_str(temp);
-		var[1] = free_str(var[1]);
-		temp = getcwd (temp, 4096);
-		var[1] = ft_strjoin ("PWD=", temp);
-		ft_export (var, envp);
-	}
+		set_dir_sup(&var, &temp, envp);
 	temp = free_str(temp);
 	var = free_db_str(var);
 	return (0);
