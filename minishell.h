@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/10 00:34:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 03:51:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int			chunk_id(t_chunk *chunk, int opt);
 char		*search_my_envp(t_execlist *execl, char *env_name);
 void		updt_rdr_lst(t_chunk *chunk, int in_out, int flag, char *n_str);
 void		parser_quote_flags(char c, int *flag);
+int			h_env_var(int *i, char **chunk, t_execlist *execl);
 
 // GLOBAL SUPPORT
 void		ft_exit(char **cmd, t_execlist *execl);

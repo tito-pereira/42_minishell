@@ -1,166 +1,93 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_2c.c                                             :+:      :+:    :+:   */
+/*   p_2b.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 19:24:37 by marvin            #+#    #+#             */
-/*   Updated: 2024/06/25 19:24:37 by marvin           ###   ########.fr       */
+/*   Created: 2024/05/22 22:44:10 by marvin            #+#    #+#             */
+/*   Updated: 2024/05/22 22:44:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*empty_heredoc(int fd)
+char	**add_char_p(char **old, char *n_str)
 {
-	char	*shovel;
-	char	*chest;
-	char	*old;
+	char	**new;
+	int		i;
 
-	shovel = get_next_line(fd);
-	chest = NULL;
-	while (shovel != NULL)
-	{
-		if (!chest)
-			chest = ft_strdup(shovel);
-		else
-		{
-			old = chest;
-			chest = ft_strjoin(chest, shovel);
-			free(shovel);
-			shovel = NULL;
-			free(old);
-		}
-		shovel = get_next_line(fd);
-	}
-	close(fd);
-	return (chest);
+	i = 0;
+	while (old[i] != NULL)
+		i++;
+	new = (char **)ft_calloc((i + 2), sizeof(char *));
+	i = -1;
+	while (old[++i] != NULL)
+		new[i] = ft_strdup(old[i]);
+	new[i] = n_str;
+	new[++i] = NULL;
+	free_db_str(old);
+	old = NULL;
+	return (new);
 }
 
-void	heredoc_chest(char **chest, char **input)
+int	*add_int_p(int *old, int flag)
 {
-	char	*old;
+	int		*new;
+	int		i;
 
-	if (!(*chest))
-		*chest = ft_strdup(*input);
+	i = 0;
+	while (old[i] != -1)
+		i++;
+	new = (int *)ft_calloc((i + 2), sizeof(int));
+	i = -1;
+	while (old[++i] != -1)
+		new[i] = old[i];
+	new[i] = flag;
+	new[++i] = -1;
+	free(old);
+	old = NULL;
+	return (new);
+}
+
+void	update_char_p(char ***in_or_out, char *n_str, int *c)
+{
+	if (*c == -1)
+	{
+		*in_or_out = (char **)ft_calloc(2, sizeof(char *));
+		(*in_or_out)[0] = n_str;
+		(*in_or_out)[1] = NULL;
+		(*c)++;
+	}
 	else
 	{
-		old = *chest;
-		*chest = ft_strjoin(*chest, *input);
-		free (old);
+		*in_or_out = add_char_p(*in_or_out, n_str);
+		(*c)++;
 	}
-	old = *chest;
-	*chest = ft_strjoin(*chest, "\n");
-	free(old);
-	free(*input);
 }
 
-char	*heredoc_rd(char *lim)
+void	update_int_p(int **in_or_out, int flag, int c)
 {
-	char	*input;
-	char	*chest;
-
-	input = NULL;
-	chest = NULL;
-	while (1)
+	if (c == 0)
 	{
-		input = readline("heredoc> ");
-		if (!input)
-			return (NULL);
-		if (ft_strncmp(lim, input, 4096) == 0)
-		{
-			free(input);
-			break ;
-		}
-		heredoc_chest(&chest, &input);
+		*in_or_out = (int *)ft_calloc(2, sizeof(int));
+		(*in_or_out)[0] = flag;
+		(*in_or_out)[1] = -1;
 	}
-	return (chest);
+	else
+		*in_or_out = add_int_p(*in_or_out, flag);
 }
 
-void	forked_sup(char **input, int *fd, char *lim)
+void	updt_rdr_lst(t_chunk *chunk, int in_out, int flag, char *n_str)
 {
-	close(fd[0]);
-	sig_handlerr(2);
-	*input = heredoc_rd(lim);
-	if (!(*input))
+	if (in_out == 0)
 	{
-		close(fd[1]);
-		exit(0);
+		update_char_p(&(chunk->infiles), n_str, &(chunk->nmb_inf));
+		update_int_p(&(chunk->here_dcs), flag, chunk->nmb_inf);
 	}
-	write(fd[1], *input, ft_strlen(*input));
-	free(*input);
-	close(fd[1]);
-	exit(0);
+	else if (in_out == 1)
+	{
+		update_char_p(&(chunk->outfiles), n_str, &(chunk->nmb_outf));
+		update_int_p(&(chunk->app_dcs), flag, chunk->nmb_outf);
+	}
 }
-
-char    *heredoc_read(char *lim)
-{
-    int     *fd;
-    int     pid;
-    char    *input;
-    char    *ret;
-
-    fd = (int *)ft_calloc(2, sizeof(int));
-	sig_handlerr(3);
-    pipe(fd);
-    pid = fork();
-    if (pid == 0)
-		forked_sup(&input, fd, lim);
-    close(fd[1]);
-    wait(NULL);
-    if (g_sig == 130)
-    {
-		close(fd[0]);
-    	free(fd);
-		return (NULL);
-    }
-    ret = empty_heredoc(fd[0]);
-    close(fd[0]);
-    free(fd);
-    return (ret);
-}
-
-
-/*
-char    *heredoc_read(char *lim)
-{
-    int     *fd;
-    int     pid;
-    char    *input;
-    char    *ret;
-
-    fd = (int *)ft_calloc(2, sizeof(int));
-	sig_handlerr(3);
-    pipe(fd);
-    pid = fork();
-    if (pid == 0)
-    {
-        close(fd[0]);
-        sig_handlerr(2);
-        input = heredoc_rd(lim);
-		if (!input)
-		{
-			close(fd[1]);
-			exit(0);
-		}
-		write(fd[1], input, ft_strlen(input));
-		free(input);
-        close(fd[1]);
-		exit(0);
-    }
-    close(fd[1]);
-    wait(NULL);
-    if (g_sig == 130)
-    {
-		close(fd[0]);
-    	free(fd);
-		return (NULL);
-    }
-    ret = empty_heredoc(fd[0]);
-    close(fd[0]);
-    free(fd);
-    return (ret);
-}
-
-*/
