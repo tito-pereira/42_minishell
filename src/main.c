@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/09 18:51:20 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 20:43:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,19 @@ int	mini_init(char **input, char ***env)
 void	mini_exit(t_execlist **execl)
 {
 	if (*execl && (*execl)->cmd_nmb == 1
+		&& ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "cd", 10) == 0)
+		(*(*execl)->exit_stt) = ft_cd((*execl)->chunk[0]->cmd_n_args, (*execl)->my_envp);
+	if (*execl && (*execl)->cmd_nmb == 1
 		&& ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "exit", 10) == 0)
 		ft_exit((*execl)->chunk[0]->cmd_n_args, *execl);
 	if (*execl)
 		free_exec(*execl, 1);
 }
+
+/*
+- retirar o cd daqueles valid cmds do pipe intermedio
+- o cd so funciona sozinho num pipe ou pode haver mais cmds? (sozinho)
+*/
 
 int	parser_success(t_execlist **execl, char ***env)
 {
@@ -84,9 +92,8 @@ int	main(void)
 }
 
 /*
-global_init()
-mini_init()
-mini_exit()
+colocar o cd dentro do mini_exit()
+
 
 envs
 sera que preciso de igualar as envs caso o parser falhe?
