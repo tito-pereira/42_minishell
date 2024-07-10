@@ -56,14 +56,26 @@ int	gt_nm_errors(t_execlist **execl, char *str, int i, int c)
 {
 	if (str[i] == '\0')
 	{
-		if (execl->chunk[c + 1])
-			(*execl->exit_stt) = 30;
-		else if (!execl->chunk[c + 1])
-			(*execl->exit_stt) = 20;
+		if ((*execl)->chunk[c + 1])
+			(*(*execl)->exit_stt) = 30;
+		else if (!(*execl)->chunk[c + 1])
+			(*(*execl)->exit_stt) = 20;
 		return (0);
 	}
-	if (get_name_errors(execl, str, i) == 0)
+	if (get_name_errors(*execl, str, i) == 0)
 		return (0);
+	return (1);
+}
+
+int	chest_options(char **chest, int flag, char *str, int i)
+{
+	if (flag == 0 && (str[i] == 9 || str[i] == 32
+		|| str[i] == '>' || str[i] == '<'))
+		return (0);
+	if ((str[i] != 34 && str[i] != 39)
+		|| (str[i] == 34 && flag == 39)
+		|| (str[i] == 39 && flag == 34))
+		getname_chest(chest, str[i]);
 	return (1);
 }
 
@@ -74,30 +86,15 @@ char	*get_name(char *str, int i, t_execlist *execl, int c)
 
 	while (str[i] == 9 || str[i] == 32)
 		i++;
-	/*if (str[i] == '\0')
-	{
-		if (execl->chunk[c + 1])
-			(*execl->exit_stt) = 30;
-		else if (!execl->chunk[c + 1])
-			(*execl->exit_stt) = 20;
-		return (NULL);
-	}
-	if (get_name_errors(execl, str, i) == 0)
-		return (NULL);*/
-	if (gt_nm_errors(execl, str, i, c) == 0)
+	if (gt_nm_errors(&execl, str, i, c) == 0)
 		return (NULL);
 	flag = 0;
 	chest = NULL;
 	while (str[i] != '\0')
 	{
 		parser_quote_flags(str[i], &flag);
-		if (flag == 0 && (str[i] == 9 || str[i] == 32
-			|| str[i] == '>' || str[i] == '<'))
+		if (chest_options(&chest, flag, str, i) == 0)
 			break ;
-		if ((str[i] != 34 && str[i] != 39)
-			|| (str[i] == 34 && flag == 39)
-			|| (str[i] == 39 && flag == 34))
-			getname_chest(&chest, str[i]);
 		i++;
 	}
 	if (flag != 0)
@@ -107,7 +104,3 @@ char	*get_name(char *str, int i, t_execlist *execl, int c)
 	}
 	return (chest);
 }
-
-/*
-dividir a getname
-*/
