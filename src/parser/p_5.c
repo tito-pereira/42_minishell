@@ -12,10 +12,7 @@
 
 #include "../../minishell.h"
 
-/*
-(5) - commands && arguments separator by whitespaces
-*/
-
+// (5) - commands && arguments separator by whitespaces + quotes handler
 
 int	arg_separator(t_execlist *execl)
 {

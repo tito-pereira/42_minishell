@@ -6,16 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:34 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/09 19:53:55 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 02:16:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
-(2) - reads and stores redirections and filenames inside each token
-inicializa cada chunk
-*/
+// (2) - reads and stores redirections and filenames inside each chunk
 
 void	get_error_msg(t_execlist *execl, int ret)
 {

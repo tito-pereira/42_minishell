@@ -6,15 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:35:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/09 02:24:15 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 02:21:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
-(6) - builtin vs shell command identifier + absolute/relative paths handler
-*/
+// (6) - builtin vs shell command identifier + absolute/relative paths handler
 
 int	check_absolute(t_chunk *chunk)
 {

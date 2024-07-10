@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 17:44:12 by marvin            #+#    #+#              #
-#    Updated: 2024/07/09 22:21:05 by marvin           ###   ########.fr        #
+#    Updated: 2024/07/09 23:51:58 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ_P= ${SRC_P:.c=.o}
 SRC_E= ./src/executor/e_main.c ./src/executor/e_loop.c \
 	./src/executor/e_action.c ./src/executor/e_close.c \
 	./src/executor/e_envs.c ./src/executor/e_redirs.c \
-	./src/executor/e_utils.c
+	./src/executor/e_utils.c ./src/executor/e_launch.c
 OBJ_E= ${SRC_E:.c=.o}
 
 SRC_B= ./src/builtin/blt_central.c ./src/builtin/cd.c \

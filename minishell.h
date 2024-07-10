@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/09 22:23:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 00:34:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,9 @@ char		*rmv_newline(char *old);
 // EXECUTOR
 int			exec_main(t_execlist *execl);
 int			exec_loop(t_execlist *execl, int **fd, char ***exec_str);
+int			exec_launch(t_execlist *execl, int **fd, int i, char ***exec_str);
+void		wait_and_get_code(t_execlist *execl, int pid);
+void		exec_action(t_execlist *execl, int **fd, int i, char ***exec_str);
 void		exec_input(t_execlist *execl, int **fd, int i);
 void		exec_output(t_execlist *execl, int **fd, int i);
 void		ex_outfile(t_execlist *execl, int **fd, int i, char ***exec_str);
@@ -135,6 +138,9 @@ int			open_all_redirs(t_execlist *execl);
 void		get_exit_code(int status, int *exit_code);
 void    	write_heredoc(t_execlist *execl, int **fd, int i, int *nfd);
 void		write_infile(t_execlist *execl, int **fd, int i, int *nfd);
+void		blt_action_outf(t_execlist *execl, int i, \
+			int *ret, char ***exec_str);
+void		receive_new_env(t_execlist **execl);
 
 // FREE
 char		*free_str(char *str);

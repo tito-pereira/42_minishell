@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:29:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 17:24:15 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 00:43:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,23 @@ void	get_ex_code(int *exit_code, char *str)
 	}
 }
 
+int	init_redirs(t_chunk *chunk, int *nfile, int *tmp, int mode)
+{
+	if (mode == 1)
+		*nfile = chunk->nmb_inf;
+	else if (mode == 2)
+		*nfile = chunk->nmb_outf;
+	*tmp = 0;
+	return (-1);
+}
+
 int	open_all_infs(t_chunk *chunk, t_execlist *execl)
 {
 	int	i;
 	int	tmp;
 	int	nfile;
 
-	i = -1;
-	nfile = chunk->nmb_inf;
-	tmp = 0;
+	i = init_redirs(chunk, &nfile, &tmp, 1);
 	if (chunk->infiles)
 	{
 		while (++i <= nfile)
@@ -66,8 +74,7 @@ int	open_all_outfs(t_chunk *chunk, t_execlist *execl)
 	int	tmp;
 	int	nfile;
 	
-	i = -1;
-	nfile = chunk->nmb_outf;
+	i = init_redirs(chunk, &nfile, &tmp, 2);
 	if (chunk->outfiles != NULL)
 	{
 		while (++i <= nfile)

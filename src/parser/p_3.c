@@ -6,15 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/09 05:36:40 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 02:15:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
-(3) - environment variable expander with '$'
-*/
+// (3) - environment variable expander with '$'
 
 void	get_positions(int *a, int *b, int *i, char *chunk)
 {
@@ -44,7 +42,7 @@ char	*get_spec(int *a, int *b, char *chunk, t_execlist *execl)
 	return (env_value);
 }
 
-int	h_env_var(int *i, char **chunk, t_execlist *execl) //int *a, int *b, 
+int	h_env_var(int *i, char **chunk, t_execlist *execl) 
 {
 	char	*spec;
 	int		a;
@@ -71,7 +69,7 @@ int	h_env_var(int *i, char **chunk, t_execlist *execl) //int *a, int *b,
 	return (1);
 }
 
-int	spec_char_chunk(t_execlist *execl, int j)// int *a, int *b)
+int	spec_char_chunk(t_execlist *execl, int j)
 {
 	int	i;
 	int	flag;
@@ -92,7 +90,7 @@ int	spec_char_chunk(t_execlist *execl, int j)// int *a, int *b)
 	return (1);
 }
 
-int	spec_char_heredoc(t_execlist *execl, int j) //int *a, int *b)
+int	spec_char_heredoc(t_execlist *execl, int j)
 {
 	int	i;
 	int	flag;

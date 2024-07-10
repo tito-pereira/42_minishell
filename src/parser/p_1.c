@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   p_1.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/08 17:57:08 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/10 02:20:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
-(1) - valid pipe counter and divide in tokens
-*/
+// (1) - valid pipe counter and divide in chunks
 
 char	**divide_pipes(t_execlist *execl, char *input)
 {

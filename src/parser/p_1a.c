@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:52:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/09 05:14:29 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 02:19:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,6 @@ void	pipe_atr_loop(t_execlist *execl, char *input, int flag, int i)
 	j = 0;
 	while (input[++i] != '\0')
 	{
-		/*if (input[i] == 34 && flag == 0)
-			flag = 34;
-		else if (input[i] == 34 && flag == 34)
-			flag = 0;
-		else if (input[i] == 39 && flag == 0)
-			flag = 39;
-		else if (input[i] == 39 && flag == 39)
-			flag = 0;*/
 		parser_quote_flags(input[i], &flag);
 		if (input[i] == '|' && input[i + 1] != '|' && flag == 0)
 		{
@@ -56,14 +48,6 @@ int	pipe_cnt_loop(t_execlist *execl, char *input, int flag, int *c)
 	i = -1;
 	while (input[++i] != '\0')
 	{
-		/*if (input[i] == 34 && flag == 0)
-			flag = 34;
-		else if (input[i] == 34 && flag == 34)
-			flag = 0;
-		else if (input[i] == 39 && flag == 0)
-			flag = 39;
-		else if (input[i] == 39 && flag == 39)
-			flag = 0;*/
 		parser_quote_flags(input[i], &flag);
 		if (input[i] == '|' && flag == 0)
 		{
@@ -82,15 +66,12 @@ int	pipe_cnt_loop(t_execlist *execl, char *input, int flag, int *c)
 int	pipe_counter(char *input, t_execlist *execl)
 {
 	int	c;
-	//int	i;
 
 	c = 0;
-	//i = -1;
 	execl->valid_cmds = 1;
 	if (pipe_cnt_loop(execl, input, 0, &c) == -1)
 		return (-1);
 	execl->pipe_loc = malloc((execl->valid_cmds + 1) * sizeof(int));
-	//i = -1;
 	pipe_atr_loop(execl, input, 0, -1);
 	return (c);
 }

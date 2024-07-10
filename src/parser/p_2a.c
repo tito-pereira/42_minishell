@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:40 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/09 21:41:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 02:15:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,6 @@ char	*get_name(char *str, int i, t_execlist *execl, int c)
 	}
 	return (chest);
 }
-
-/*
-get name
-*/
 
 int	check_delim_error(t_execlist *execl, char *delim)
 {

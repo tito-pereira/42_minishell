@@ -6,15 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:12:29 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/09 22:18:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/10 02:20:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
-(4) - remove redirections from the parsing string to simplify parsing process
-*/
+// (4) - remove redirections from the parsing string to simplify parsing process
 
 void	temp_strings(char *og, char **new, int a, int b)
 {

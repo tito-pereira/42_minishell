@@ -57,3 +57,29 @@ void	write_infile(t_execlist *execl, int **fd, int i, int *nfd)
 	}
     wait(0);
 }
+
+void	blt_action_outf(t_execlist *execl, int i, int *ret, char ***exec_str)
+{
+	int	n_file;
+	int	tmp;
+
+	n_file = execl->chunk[i]->nmb_outf;
+	if (execl->chunk[i]->app_dcs[n_file] == 1)
+		tmp = open(execl->chunk[i]->outfiles[n_file], \
+		O_RDWR | O_CREAT | O_APPEND, 0644);
+	else if (execl->chunk[i]->app_dcs[n_file] == 0)
+		tmp = open(execl->chunk[i]->outfiles[n_file], \
+		O_RDWR | O_CREAT | O_TRUNC, 0644);
+	dup2(tmp, STDOUT_FILENO);
+	close(tmp);
+	*ret = blt_central(execl, i, exec_str[i]);
+	close(tmp);
+}
+
+void	receive_new_env(t_execlist **execl)
+{
+	close((*execl)->env_pipe[1]);
+	free_db_str((*execl)->my_envp[0]);
+	(*execl)->my_envp = read_from_pipe((*execl)->env_pipe[0], *execl);
+	close((*execl)->env_pipe[0]);
+}
