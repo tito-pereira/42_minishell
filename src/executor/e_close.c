@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:30:22 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 10:40:23 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:13:02 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,10 @@ void	close_related(t_execlist *execl, int **fd, int i)
 	}
 }
 
-void	close_pipes(t_execlist *execl, int **fd, int i, int mode) //rel, non rel
+void	close_pipes(t_execlist *execl, int **fd, int i, int mode)
 {
 	if (mode == 1 || mode == 3)
 		close_related(execl, fd, i);
 	if (mode == 2 || mode == 3)
 		close_non_related(execl, fd, i);
 }
-
-/*
-e_close - close_pipes (transformar aqueles related ou non numa so flag de 1 a 3)
-
-rel 1, non rel 0 - mode 1
-rel 0, non rel 1 - mode 2
-rel 1, non rel 1 - mode 3
-*/
