@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:43:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 14:30:44 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:22:17 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_execlist	*free_exec(t_execlist *execl, int mode)
 	if (execl->my_envp && mode == 2)
 	{
 		*(execl->my_envp) = free_db_str(*(execl->my_envp));
-		free(execl->my_envp);
+		free(*(execl->my_envp));
 		execl->my_envp = NULL;
 	}
 	if (execl->pipe_loc)
