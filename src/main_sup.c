@@ -80,9 +80,7 @@ int	parse_central(t_execlist **execl, char *input, int *exit_stt, char ***env)
 		flag = scope_redirs(*execl);
 	if (flag == 1)
 		flag = arg_separator(*execl);
-	//printf("arg separator returned %d\n", flag);
 	if (flag == 1)
 		flag = arg_id(*execl);
-	//printf("arg id returned %d\n", flag);
 	return (flag);
 }
