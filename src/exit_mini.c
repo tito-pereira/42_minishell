@@ -48,6 +48,18 @@ static int	is_only_zeros(char *cmd)
 	return (1);
 }
 
+void	exit_errors(t_execlist **execl, char **cmd)
+{
+	if (cmd[2])
+	{
+		ft_printf("minishell: exit: %s: too many arguments\n", cmd[2]);
+		*((*execl)->exit_stt) = 1;
+		return ;
+	}
+	ft_printf("minishell: exit: %s: Numeric argument required\n", cmd[1]);
+	*((*execl)->exit_stt) = 2;
+}
+
 void	ft_exit(char **cmd, t_execlist **execl)
 {
 	unsigned long long	code;
@@ -69,12 +81,13 @@ void	ft_exit(char **cmd, t_execlist **execl)
 		ft_printf("minishell: exited with error code: %d\n", code);
 		exit(code);
 	}
-	if (cmd[2])
+	exit_errors(execl, cmd);
+	/*if (cmd[2])
 	{
 		ft_printf("minishell: exit: %s: too many arguments\n", cmd[2]);
 		*((*execl)->exit_stt) = 1;
 		return ;
 	}
 	ft_printf("minishell: exit: %s: Numeric argument required\n", cmd[1]);
-	*((*execl)->exit_stt) = 2;
+	*((*execl)->exit_stt) = 2;*/
 }
