@@ -6,76 +6,79 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:45:01 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 10:50:27 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:33:22 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	quote_handler(int option, char c, int *qt, int *qts)
+void	separator_chest(char **chest, char c)
 {
-	if (option == 1)
+	char	*old;
+	char	*input;
+
+	input = (char *)ft_calloc(2, sizeof(char));
+	input[0] = c;
+	input[1] = '\0';
+	if (!(*chest))
+		*chest = ft_strdup(input);
+	else
 	{
-		if (c == 39)
-			*qt *= -1;
-		else if (c == 34)
-			*qts *= -1;
+		old = *chest;
+		*chest = ft_strjoin(*chest, input);
+		free (old);
 	}
-	if (option == 2)
-	{
-		if (*qt == -1)
-			return (-1);
-		if (*qts == -1)
-			return (-1);
-	}
+	free(input);
+}
+
+int	separator_options(char **chest, int flag, char *str, int i)
+{
+	if (flag == 0 && (str[i] == 9 || str[i] == 32))
+		return (0);
+	if ((str[i] != 34 && str[i] != 39)
+		|| (str[i] == 34 && flag == 39)
+		|| (str[i] == 39 && flag == 34))
+		separator_chest(chest, str[i]);
 	return (1);
 }
 
-int	non_white(int *a, int *b, t_chunk *chunk, int *i)
+int	non_white(char **chest, t_chunk *chunk, int *i)
 {
-	int	quote;
-	int	quotes;
+	int	flag;
 
-	quote = 1;
-	quotes = 1;
-	*a = *i;
-	while ((chunk->og[*i] != '\0')
-		&& ((chunk->og[*i] != 9 && chunk->og[*i] != 32)
-			|| ((chunk->og[*i] == 9 || chunk->og[*i] == 32)
-				&& quote_handler(2, chunk->og[*i], &quote, &quotes) == -1)))
+	flag = 0;
+	*chest = NULL;
+	while (chunk->og[*i] != '\0')
 	{
-		quote_handler(1, chunk->og[*i], &quote, &quotes);
+		parser_quote_flags(chunk->og[*i], &flag);
+		if (separator_options(chest, flag, chunk->og, *i) == 0)
+			break ;
 		(*i)++;
 	}
-	if (chunk->og[*i] == 9 || chunk->og[*i] == 32
-		|| chunk->og[*i] == '\0' || (!quote && !quotes))
-		*b = *i - 1;
+	if (flag != 0)
+		return (-1);
 	return (1);
 }
 
 int	cmd_separator(t_chunk *chunk)
 {
 	int		i;
-	int		a;
-	int		b;
-	char	*sub;
+	char	*chest;
 
 	i = -1;
-	a = 0;
-	b = 0;
+	chest = NULL;
 	while (chunk->og[++i])
 	{
 		if (chunk->og[i] != 9 && chunk->og[i] != 32)
 		{
-			if (non_white(&a, &b, chunk, &i) == -1)
+			if (non_white(&chest, chunk, &i) == -1)
 				return (-1);
-			sub = ft_substr(chunk->og, a, (b - a + 1));
-			add_arg(chunk, &sub);
+			add_arg(chunk, &chest);
 		}
 		if (chunk->og[i] == '\0')
 			return (1);
 	}
-	if (a == b && chunk->cmd_n_args == NULL)
+	if (chunk->cmd_n_args == NULL)
 		return (0);
 	return (1);
 }

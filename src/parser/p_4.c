@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:12:29 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 10:48:14 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:02:38 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void	temp_strings(char *og, char **new, int a, int b)
 	else if (first && !secnd)
 		*new = first;
 }
+
+/*
+if first, free(first)
+if secnd, free(secnd)
+*/
 
 void	find_redirs(char *og, int *a, int *b, int *i)
 {
