@@ -78,7 +78,7 @@ void	ft_exit(char **cmd, t_execlist **execl)
 		code = ft_atol(cmd[1]);
 		code = ((code * sign) % 256 + 256) % 256;
 		free_exec(*execl, 2);
-		ft_printf("minishell: exited with error code: %d\n", code);
+		ft_printf("exit\n");
 		exit(code);
 	}
 	exit_errors(execl, cmd);
