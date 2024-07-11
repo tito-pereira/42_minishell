@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:40:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 14:44:32 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:46:31 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,19 @@ char	**find_execve(char *name, int option)
 	env = NULL;
 	if (option == 1)
 	{
-		env = ft_calloc(4, sizeof(char *));
+		env = ft_calloc(5, sizeof(char *));
 		env[0] = ft_strdup("/usr/bin/find");
 		env[1] = ft_strdup(".");
 		env[2] = ft_strdup("-name");
 		env[3] = ft_strdup(name);
+		env[4] = NULL;
 	}
 	else if (option == 2)
 	{
-		env = ft_calloc(2, sizeof(char *));
+		env = ft_calloc(3, sizeof(char *));
 		env[0] = ft_strdup("/usr/bin/which");
 		env[1] = ft_strdup(name);
+		env[2] = NULL;
 	}
 	return (env);
 }
