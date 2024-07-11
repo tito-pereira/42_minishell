@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_action.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:39:10 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/09 22:29:20 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:41:58 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ void	exec_input(t_execlist *execl, int **fd, int i)
 	n_file = execl->chunk[i]->nmb_inf;
 	nfd = (int *)ft_calloc(2, sizeof(int));
 	pipe(nfd);
-    close_pipes(execl, fd, i, 2);
-	if (execl->chunk[i]->infiles && execl->chunk[i]->here_dcs[n_file] == 1 )
+	close_pipes(execl, fd, i, 2);
+	if (execl->chunk[i]->infiles && execl->chunk[i]->here_dcs[n_file] == 1)
 	{
-        write_heredoc(execl, fd, i, nfd);
+		write_heredoc(execl, fd, i, nfd);
 		dup2(nfd[0], STDIN_FILENO);
 	}
-    else if (execl->chunk[i]->infiles && execl->chunk[i]->here_dcs[n_file] == 0)
-    {
+	else if (execl->chunk[i]->infiles && execl->chunk[i]->here_dcs[n_file] == 0)
+	{
 		write_infile(execl, fd, i, nfd);
 		dup2(nfd[0], STDIN_FILENO);
-    }
+	}
 	else if (!execl->chunk[i]->infiles && i > 0)
-        dup2(fd[i][0], STDIN_FILENO);
+		dup2(fd[i][0], STDIN_FILENO);
 	input_end(fd, &nfd, i);
 }
 

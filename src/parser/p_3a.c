@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_3a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 13:11:55 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 16:38:04 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:52:34 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*chnk_conditions(char *spec, char *first, char *secnd)
 {
 	char	*new;
 	char	*tmp;
-	
+
 	new = NULL;
 	if (first && secnd)
 	{
@@ -29,7 +29,7 @@ char	*chnk_conditions(char *spec, char *first, char *secnd)
 		new = ft_strjoin(first, spec);
 	else if (!first && !secnd)
 		new = ft_strdup(spec);
-	return(new);
+	return (new);
 }
 
 void	check_empty_strs(char **first, char **secnd)
@@ -62,7 +62,7 @@ char	*new_chnk(char *spec, char *old, int a, int b)
 		free(secnd);
 	free(spec);
 	if (new == NULL)
-		return(NULL);
+		return (NULL);
 	free(old);
-	return(new);
+	return (new);
 }

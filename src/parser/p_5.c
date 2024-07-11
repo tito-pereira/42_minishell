@@ -1,12 +1,12 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_4.c                                              :+:      :+:    :+:   */
+/*   p_5.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 17:44:55 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/18 17:44:56 by marvin           ###   ########.fr       */
+/*   Created: 2024/07/11 10:51:26 by tibarbos          #+#    #+#             */
+/*   Updated: 2024/07/11 10:51:58 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ int	arg_separator(t_execlist *execl)
 		{
 			ft_printf("minishell: syntax error near unexpected token `|'\n");
 			*(execl->exit_stt) = 2;
-			return(0);
+			return (0);
 		}
 		else if (ret == -1)
 		{
 			ft_printf("minishell: unclosed quotes\n");
 			*(execl->exit_stt) = 1;
-			return(0);
+			return (0);
 		}
 	}
-	return(1);
+	return (1);
 }
 
 void	add_arg(t_chunk *chunk, char **str)

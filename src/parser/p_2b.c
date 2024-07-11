@@ -31,7 +31,7 @@ void	getname_chest(char **chest, char c)
 	free(input);
 }
 
-int		get_name_errors(t_execlist *execl, char *str, int i)
+int	get_name_errors(t_execlist *execl, char *str, int i)
 {
 	if (str[i] == '<')
 	{
@@ -70,7 +70,7 @@ int	gt_nm_errors(t_execlist **execl, char *str, int i, int c)
 int	chest_options(char **chest, int flag, char *str, int i)
 {
 	if (flag == 0 && (str[i] == 9 || str[i] == 32
-		|| str[i] == '>' || str[i] == '<'))
+			|| str[i] == '>' || str[i] == '<'))
 		return (0);
 	if ((str[i] != 34 && str[i] != 39)
 		|| (str[i] == 34 && flag == 39)

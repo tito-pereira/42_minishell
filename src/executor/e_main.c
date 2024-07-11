@@ -14,8 +14,8 @@
 
 void	init_exec(t_execlist *execl, int **fd)
 {
-	int i;
-	
+	int	i;
+
 	i = -1;
 	while (++i < execl->valid_cmds)
 	{
@@ -26,8 +26,8 @@ void	init_exec(t_execlist *execl, int **fd)
 
 void	end_exec(t_execlist *execl, int **fd, char ***exec_str)
 {
-	int i;
-	
+	int	i;
+
 	i = -1;
 	while (++i < execl->valid_cmds)
 	{

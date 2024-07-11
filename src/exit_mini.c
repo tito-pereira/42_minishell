@@ -52,7 +52,7 @@ void	ft_exit(char **cmd, t_execlist *execl)
 {
 	unsigned long long	code;
 	int					sign;
-	
+
 	sign = 1;
 	if (((!cmd[1]) || (!cmd[2] && is_only_zeros(cmd[1]) == 1))
 		&& execl->cmd_nmb == 1)
@@ -70,50 +70,3 @@ void	ft_exit(char **cmd, t_execlist *execl)
 	}
 	ft_printf("minishell: exit: %s: Numeric argument required\n", cmd[1]);
 }
-
-/*
-if (*execl && (*execl)->cmd_nmb == 1
-	&& ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "exit", 10) == 0)
-	ft_exit((*execl)->chunk[0]->cmd_n_args, *execl);
-
-ou seja, é para fazer a verificacao dos argumentos na mesma
-mas sem mudar o exit_stt
-e sem sair da shell
-
-minishell:~/jose$ exit 234 | echo stuff
-exit
-minishell: exit: too many arguments
-minishell:~/jose$ echo $?
-1
-vs
-root_tito@tabp:~$ exit 234 | echo stuff
-stuff
-root_tito@tabp:~$ echo $?
-0
-
-minishell:~/jose$ exit adc | echo stuff
-exit
-minishell: exit: adc: numeric argument required
-root_tito@tabp:~/jose$ echo $?
-2
-vs
-root_tito@tabp:~$ exit adc | echo stuff
-stuff
-bash: exit: adc: numeric argument required
-root_tito@tabp:~$ echo $?
-0
-
-echo one| echo two | exit abc | echo stufftwo
-bash: exit: abc: numeric argument required
-stufftwo (exit stt 0)
-
-echo two | exit abc | exit def | echo stufftwo
-bash: exit: abc: numeric argument required
-bash: exit: def: numeric argument required
-stufftwo (exit stt 0)
-
-eu executo primeiro os echos e só depois venho ao exit
-mas tem que ser agora nao vou mudar
-(o proprio bash as vezes varia a ordem é tranquilo)
-
-*/

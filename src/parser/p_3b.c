@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   p_3b.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:14:26 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 16:38:58 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:48:39 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int		match_var(t_execlist *execl, int i, char *env_name)
+int	match_var(t_execlist *execl, int i, char *env_name)
 {
 	int	j;
 
@@ -27,7 +27,7 @@ int		match_var(t_execlist *execl, int i, char *env_name)
 char	*search_my_envp(t_execlist *execl, char *env_name)
 {
 	int	i;
-	
+
 	i = -1;
 	while (execl->my_envp[0][++i] != NULL)
 	{

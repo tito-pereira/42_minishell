@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_1.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/10 02:20:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:53:26 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**divide_pipes(t_execlist *execl, char *input)
 	og_group = malloc((execl->valid_cmds + 1) * sizeof(char *));
 	i = -1;
 	beg = 0;
-	while(++i < execl->valid_cmds)
+	while (++i < execl->valid_cmds)
 	{
 		end = ft_strlen(input);
 		if (execl->pipe_loc[i] != '\0')
@@ -53,7 +53,7 @@ int	chunk_create(char *input, t_execlist *execl)
 		execl->chunk[i]->og = og_group[i];
 	}
 	free (og_group);
-	return(1);
+	return (1);
 }
 
 int	pipe_chunks(t_execlist **execl, char *input, int *ex_stt, char ***env)
@@ -66,7 +66,7 @@ int	pipe_chunks(t_execlist **execl, char *input, int *ex_stt, char ***env)
 	{
 		ft_printf("minishell: syntax error near unexpected token `|'\n");
 		*ex_stt = 2;
-		return(0);
+		return (0);
 	}
 	(*execl)->chunk = (t_chunk **)ft_calloc((c + 2), sizeof(t_chunk *));
 	(*execl)->cmd_nmb = c + 1;
@@ -76,6 +76,6 @@ int	pipe_chunks(t_execlist **execl, char *input, int *ex_stt, char ***env)
 	(*execl)->env_pipe = NULL;
 	(*execl)->chunk[c + 1] = NULL;
 	if (chunk_create(input, *execl) == 0)
-		return(0);
-	return(1);
+		return (0);
+	return (1);
 }

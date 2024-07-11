@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_6a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:40:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/08 16:52:23 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:57:36 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ char	*rmv_newline(char *old)
 		new = malloc(len * sizeof(char));
 		ft_strlcpy(new, old, len);
 		free(old);
-		return(new);
+		return (new);
 	}
-	return(old);
+	return (old);
 }
 
 char	**find_execve(char *name, int option)
@@ -90,7 +90,7 @@ char	*find_path(char	*arg, int option)
 	return (path);
 }
 
-int	chunk_id(t_chunk *chunk, int opt) 
+int	chunk_id(t_chunk *chunk, int opt)
 {
 	char	*path;
 	char	*old;

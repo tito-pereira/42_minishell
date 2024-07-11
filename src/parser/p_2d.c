@@ -94,73 +94,29 @@ void	forked_sup(char **input, int *fd, char *lim)
 	exit(0);
 }
 
-char    *heredoc_read(char *lim)
+char	*heredoc_read(char *lim)
 {
-    int     *fd;
-    int     pid;
-    char    *input;
-    char    *ret;
+	int		*fd;
+	int		pid;
+	char	*input;
+	char	*ret;
 
-    fd = (int *)ft_calloc(2, sizeof(int));
+	fd = (int *)ft_calloc(2, sizeof(int));
 	sig_handlerr(3);
-    pipe(fd);
-    pid = fork();
-    if (pid == 0)
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
 		forked_sup(&input, fd, lim);
-    close(fd[1]);
-    wait(NULL);
-    if (g_sig == 130)
-    {
+	close(fd[1]);
+	wait(NULL);
+	if (g_sig == 130)
+	{
 		close(fd[0]);
-    	free(fd);
+		free(fd);
 		return (NULL);
-    }
-    ret = empty_heredoc(fd[0]);
-    close(fd[0]);
-    free(fd);
-    return (ret);
+	}
+	ret = empty_heredoc(fd[0]);
+	close(fd[0]);
+	free(fd);
+	return (ret);
 }
-
-
-/*
-char    *heredoc_read(char *lim)
-{
-    int     *fd;
-    int     pid;
-    char    *input;
-    char    *ret;
-
-    fd = (int *)ft_calloc(2, sizeof(int));
-	sig_handlerr(3);
-    pipe(fd);
-    pid = fork();
-    if (pid == 0)
-    {
-        close(fd[0]);
-        sig_handlerr(2);
-        input = heredoc_rd(lim);
-		if (!input)
-		{
-			close(fd[1]);
-			exit(0);
-		}
-		write(fd[1], input, ft_strlen(input));
-		free(input);
-        close(fd[1]);
-		exit(0);
-    }
-    close(fd[1]);
-    wait(NULL);
-    if (g_sig == 130)
-    {
-		close(fd[0]);
-    	free(fd);
-		return (NULL);
-    }
-    ret = empty_heredoc(fd[0]);
-    close(fd[0]);
-    free(fd);
-    return (ret);
-}
-
-*/

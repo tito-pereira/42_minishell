@@ -12,16 +12,6 @@
 
 #include "../minishell.h"
 
-/*void	args_check(int argc, char **argv)
-{
-	(void)argv;
-	if (argc != 1)
-	{
-		ft_printf("minishell: ./minishell: no arguments required\n");
-		exit(1);
-	}
-}*/
-
 int	null_input(char *input)
 {
 	int	i;
@@ -72,7 +62,7 @@ char	**create_envp(void)
 	while (__environ[++i] != NULL)
 		my_envp[i] = ft_strdup(__environ[i]);
 	my_envp[i] = NULL;
-	return(my_envp);
+	return (my_envp);
 }
 
 int	parse_central(t_execlist **execl, char *input, int *exit_stt, char ***env)

@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:15 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/08 18:35:22 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:32:53 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	update_var(char *var, int var_pos, char ***envp)
 		envp_temp[var_pos] = ft_strdup (var);
 		while (var_pos--)
 			envp_temp[var_pos] = ft_strdup (envp[0][var_pos]);
-		*envp = free_db_str(*envp); 
+		*envp = free_db_str(*envp);
 		*envp = envp_temp;
 	}
 	else
@@ -89,7 +89,7 @@ int	ft_export(char **cmd, char ***envp)
 		{
 			ft_printf("minishell: export: %s: is not valid\n", cmd[i]);
 			return (1);
-		}	
+		}
 		i++;
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_redirs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:29:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 02:37:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 11:04:09 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,24 @@ int	open_all_infs(t_chunk *chunk, t_execlist *execl)
 	return (0);
 }
 
-int	open_all_outfs(t_chunk *chunk, t_execlist *execl)
+int	open_all_outfs(t_chunk *c, t_execlist *execl)
 {
 	int	i;
 	int	tmp;
 	int	nfile;
-	
-	i = init_redirs(chunk, &nfile, &tmp, 2);
-	if (chunk->outfiles != NULL)
+
+	i = init_redirs(c, &nfile, &tmp, 2);
+	if (c->outfiles != NULL)
 	{
 		while (++i <= nfile)
 		{
-			if (chunk->app_dcs[i] == 0)
-				tmp = open(chunk->outfiles[i], O_RDWR | O_CREAT | O_TRUNC, 0644);
-			else if (chunk->app_dcs[i] == 1)
-				tmp = open(chunk->outfiles[i], O_RDWR | O_CREAT | O_APPEND, 0644);
+			if (c->app_dcs[i] == 0)
+				tmp = open(c->outfiles[i], O_RDWR | O_CREAT | O_TRUNC, 0644);
+			else if (c->app_dcs[i] == 1)
+				tmp = open(c->outfiles[i], O_RDWR | O_CREAT | O_APPEND, 0644);
 			if (tmp == -1)
 			{
-				get_ex_code(execl->exit_stt, chunk->outfiles[i]);
+				get_ex_code(execl->exit_stt, c->outfiles[i]);
 				return (-1);
 			}
 			if (tmp != -1)
@@ -115,21 +115,3 @@ int	open_all_redirs(t_execlist *execl)
 	}
 	return (0);
 }
-
-/*
-
-
-redir erroc codes (also preencher nos testes a fazer)
-    - (nas redirs) ft_printf("minishell: non-existant file or path\n"), *exit_code = 127; ???
-    - (nas redirs) permission denied 126 ???
-(tinha 126 e mudei para 1)
-
->> minishell: cat stuff >$HOME >$PWD >$USER
-minishell: unspecified file redirection error
->> minishell: echo $?
-1
-minishell:~/jose$ cat >$HOME >$PWD >$USER
-minishell: /home/root_tito: Is a directory
-minishell:~/jose$ echo $?
-1
-*/

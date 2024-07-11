@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_3.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/10 03:44:34 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:49:42 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	spec_char_chunk(t_execlist *execl, int j)
 {
 	int	i;
 	int	flag;
-	
+
 	i = -1;
 	flag = 1;
 	while (execl->chunk[j]->og[++i] != '\0')
@@ -40,7 +40,7 @@ int	spec_char_infiles(t_execlist *execl, int j)
 	int	i;
 	int	flag;
 	int	inf;
-	
+
 	inf = -1;
 	while (execl->chunk[j]->infiles[++inf] != NULL)
 	{
@@ -66,7 +66,7 @@ int	spec_char_outfiles(t_execlist *execl, int j)
 	int	i;
 	int	flag;
 	int	out;
-	
+
 	out = -1;
 	while (execl->chunk[j]->outfiles[++out] != NULL)
 	{
@@ -107,5 +107,5 @@ int	special_char(t_execlist *execl)
 				return (0);
 		}
 	}
-	return(1);
+	return (1);
 }

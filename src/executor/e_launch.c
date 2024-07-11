@@ -34,7 +34,7 @@ int	exec_launch(t_execlist *execl, int **fd, int i, char ***exec_str)
 		if (pid1 == 0)
 			exec_launch(execl, fd, i, exec_str);
 		i--;
-	} 
+	}
 	pid2 = fork();
 	if (pid2 == 0)
 		exec_action(execl, fd, i, exec_str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:08 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/08 16:54:10 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:32:29 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	the_printer(char **cmd, int i, int j, int *newline)
 		while (cmd[i][j] == 'n')
 			j++;
 		if (cmd[i][j] != '\0')
-			break;
+			break ;
 		*newline = 0;
 		i++;
 	}
@@ -34,9 +34,9 @@ void	the_printer(char **cmd, int i, int j, int *newline)
 
 void	ft_echo(char **cmd)
 {
-	int newline;
-	int i;
-	int j;
+	int	newline;
+	int	i;
+	int	j;
 
 	newline = 1;
 	i = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_2a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:40 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 00:36:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:50:57 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_delim_error(t_execlist *execl, char *delim)
 int	input_redir(int i, char *nwe, t_execlist *execl, int c)
 {
 	int	ret;
-	
+
 	i++;
 	if (execl->chunk[c]->og[i] == '<')
 	{
@@ -62,7 +62,7 @@ int	input_redir(int i, char *nwe, t_execlist *execl, int c)
 int	output_redir(int i, char *nwe, t_execlist *execl, int c)
 {
 	i++;
-	if(execl->chunk[c]->og[i] == '>')
+	if (execl->chunk[c]->og[i] == '>')
 	{
 		i++;
 		execl->chunk[c]->append = 1;
@@ -80,5 +80,5 @@ int	output_redir(int i, char *nwe, t_execlist *execl, int c)
 			return (-1);
 		updt_rdr_lst(execl->chunk[c], 1, 0, nwe);
 	}
-	return(1);
+	return (1);
 }

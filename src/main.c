@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 07:40:27 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 11:05:41 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_sig;
 
-void	global_init(int *exit_stt, char ***env, int argc, char **argv) 
+void	global_init(int *exit_stt, char ***env, int argc, char **argv)
 {
 	(void)argv;
 	if (argc != 1)
@@ -29,7 +29,6 @@ void	global_init(int *exit_stt, char ***env, int argc, char **argv)
 
 int	mini_init(t_execlist **execl, char **input, char ***env, int *exit_stt)
 {
-	//g_sig = 128;
 	*execl = NULL;
 	sig_handlerr(1);
 	if (ft_read(input, env) == 0)
@@ -102,72 +101,3 @@ int	main(int argc, char **argv)
 		mini_exit(&execl);
 	}
 }
-
-/*
-tirar o execl dentro da global init
-p ja testei com aqueles white commands e ta tudo bem
-
-
-void	mini_exit(t_execlist **execl)
-{
-	if (*execl && (*execl)->cmd_nmb == 1
-		&& ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "cd", 10) == 0)
-		(*(*execl)->exit_stt) = ft_cd((*execl)->chunk[0]->cmd_n_args, \
-		(*execl)->my_envp);
-	if (*execl && ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "exit", 9) == 0)
-		ft_exit((*execl)->chunk[0]->cmd_n_args, *execl);
-	if (*execl)
-		free_exec(*execl, 1);
-}
-*/
-
-/*
-
-int	main(void)
-{
-	char			*input;
-	t_execlist		*execl;
-	int				exit_stt;
-	char			**env;
-
-	exit_stt = 0;
-	g_sig = 0;
-	execl = NULL;
-	env = create_envp();
-	while (1)
-	{
-		g_sig = 128;
-		sig_handlerr(1);
-		if (ft_read(&input, &env) == 0)
-			continue ;
-		if (parse_central(&execl, input, &exit_stt, &env) == 1)
-		{
-			(*execl->exit_stt) = 0;
-			exec_main(execl);
-			if (execl->exit_stt && (*execl->exit_stt) == 0)
-				env = *(execl->my_envp);
-			else if ((*execl->exit_stt) && (*execl->exit_stt) != 0)
-			{
-				env = *(execl->my_envp);
-				if (execl)
-					free_exec(execl, 1);
-				continue ;
-			}
-		}
-		else
-		{
-			if (execl)
-			{
-				env = *(execl->my_envp);
-				free_exec(execl, 1);
-			}
-			continue ;
-		}
-		if (execl && execl->cmd_nmb == 1
-			&& ft_strncmp(execl->chunk[0]->cmd_n_args[0], "exit", 10) == 0)
-			ft_exit(execl->chunk[0]->cmd_n_args, execl);
-		if (execl)
-			free_exec(execl, 1);
-	}
-}
-*/

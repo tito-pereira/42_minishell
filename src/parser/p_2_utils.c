@@ -32,7 +32,8 @@ int	valid_delim(t_execlist **execl, int c, int i, char **nwe)
 {
 	if ((*execl)->chunk[c]->delimiter != NULL)
 		free((*execl)->chunk[c]->delimiter);
-	(*execl)->chunk[c]->delimiter = get_name((*execl)->chunk[c]->og, i, *execl, c);
+	(*execl)->chunk[c]->delimiter = get_name((*execl)->chunk[c]->og, \
+	i, *execl, c);
 	if ((*execl)->chunk[c]->delimiter == NULL
 		|| check_delim_error((*execl), (*execl)->chunk[c]->delimiter) == 0)
 		return (-1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_5a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:45:01 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/09 15:00:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:50:27 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	non_white(int *a, int *b, t_chunk *chunk, int *i)
 	quote = 1;
 	quotes = 1;
 	*a = *i;
-	while((chunk->og[*i] != '\0')
+	while ((chunk->og[*i] != '\0')
 		&& ((chunk->og[*i] != 9 && chunk->og[*i] != 32)
-		|| ((chunk->og[*i] == 9 || chunk->og[*i] == 32)
-		&& quote_handler(2, chunk->og[*i], &quote, &quotes) == -1)))
+			|| ((chunk->og[*i] == 9 || chunk->og[*i] == 32)
+				&& quote_handler(2, chunk->og[*i], &quote, &quotes) == -1)))
 	{
 		quote_handler(1, chunk->og[*i], &quote, &quotes);
 		(*i)++;
@@ -50,7 +50,7 @@ int	non_white(int *a, int *b, t_chunk *chunk, int *i)
 	if (chunk->og[*i] == 9 || chunk->og[*i] == 32
 		|| chunk->og[*i] == '\0' || (!quote && !quotes))
 		*b = *i - 1;
-	return(1);
+	return (1);
 }
 
 int	cmd_separator(t_chunk *chunk)

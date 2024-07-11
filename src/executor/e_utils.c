@@ -12,15 +12,15 @@
 
 #include "../../minishell.h"
 
-void    write_heredoc(t_execlist *execl, int **fd, int i, int *nfd)
+void	write_heredoc(t_execlist *execl, int **fd, int i, int *nfd)
 {
-    int pid;
+	int	pid;
 	int	n_file;
 
 	n_file = execl->chunk[i]->nmb_inf;
 	pid = fork();
-    if (pid == 0)
-    {
+	if (pid == 0)
+	{
 		close_pipes(execl, fd, i, 1);
 		close(nfd[0]);
 		write(nfd[1], execl->chunk[i]->infiles[n_file], \
@@ -28,18 +28,18 @@ void    write_heredoc(t_execlist *execl, int **fd, int i, int *nfd)
 		close(nfd[1]);
 		exit(0);
 	}
-    wait(0);
+	wait(0);
 }
 
 void	write_infile(t_execlist *execl, int **fd, int i, int *nfd)
 {
-	int 	pid;
+	int		pid;
 	int		infile;
 	char	*shovel;
 
 	pid = fork();
-    if (pid == 0)
-    {
+	if (pid == 0)
+	{
 		close_pipes(execl, fd, i, 1);
 		close(nfd[0]);
 		infile = open(execl->chunk[i]->infiles[execl->chunk[i]->nmb_inf], \
@@ -55,7 +55,7 @@ void	write_infile(t_execlist *execl, int **fd, int i, int *nfd)
 		close(nfd[1]);
 		exit(0);
 	}
-    wait(0);
+	wait(0);
 }
 
 void	blt_action_outf(t_execlist *execl, int i, int *ret, char ***exec_str)

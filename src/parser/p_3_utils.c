@@ -29,18 +29,18 @@ char	*get_spec(int *a, int *b, char *chunk, t_execlist *execl)
 
 	env_name = ft_substr(chunk, ((*a) + 1), ((*b) - (*a)));
 	if (!env_name)
-		return(NULL);
+		return (NULL);
 	if (env_name[0] == '?')
 		env_value = ft_itoa(*(execl->exit_stt));
 	else
 		env_value = search_my_envp(execl, env_name);
 	if (!env_value)
-		return(NULL);
+		return (NULL);
 	free(env_name);
 	return (env_value);
 }
 
-int	h_env_var(int *i, char **chunk, t_execlist *execl) 
+int	h_env_var(int *i, char **chunk, t_execlist *execl)
 {
 	char	*spec;
 	int		a;
@@ -57,7 +57,6 @@ int	h_env_var(int *i, char **chunk, t_execlist *execl)
 		spec = (char *)ft_calloc(1, sizeof(char));
 		spec[0] = '\0';
 		*chunk = new_chnk(spec, *chunk, a, b);
-
 	}
 	if (*chunk == NULL)
 	{

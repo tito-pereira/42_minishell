@@ -62,33 +62,3 @@ void	support_print(t_execlist *execl, int c)
 	}
 }
 */
-
-/*
-void	print_exec(t_execlist *execl)
-{
-	ft_printf("-.-.-.-.-.-.-.-.-.-\n");
-	ft_printf(".	PRINT CHUNKS	.\n");
-	ft_printf("-.-.-.-.-.-.-.-.-.-\n");
-	ft_printf("General overview:\nNumber of commands: %d;", execl->cmd_nmb);
-	ft_printf("\nNumber of pipes: %d;\n", execl->pipe_nmb);
-	ft_printf("-.-.-.-.-.-.-.-.-.-.\n-.-.-.-.-.-.-.-.-.-.\n");
-	for (int i = 0; execl->chunk[i] != NULL; i++) {
-		ft_printf("Chunk nª%d\n", i);
-		print_db_char(execl->chunk[i]->cmd_n_args);
-		if (execl->chunk[i]->blt == 1)
-			ft_printf("PATH: %s;\n", execl->chunk[i]->path);
-		else
-			ft_printf("PATH: NULL;\n");;
-		ft_printf("Heredoc: %d;\nAppend: %d;\n", execl->chunk[i]->heredoc, execl->chunk[i]->append);
-		if (execl->chunk[i]->infile)
-			ft_printf("infile: %s;\n", execl->chunk[i]->infile);
-		else
-			ft_printf("infile: NULL\n");
-		if (execl->chunk[i]->outfile)
-			ft_printf("outfile: %s;\n", execl->chunk[i]->outfile);
-		else
-			ft_printf("outfile: NULL\n");
-		ft_printf("-.-.-.-.-.-.-.-.-.-.\n-.-.-.-.-.-.-.-.-.-.\n");
-	}
-}*/
-///////////////////////////////////////////////

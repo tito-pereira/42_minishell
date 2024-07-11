@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_envs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:41:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/09 22:38:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:43:58 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	write_to_pipe(int fd, char ***envs)
 	int	i;
 
 	i = -1;
-	while(envs && envs[0][++i])
+	while (envs && envs[0][++i])
 	{
 		ft_putstr_fd(envs[0][i], fd);
 		ft_putchar_fd('\n', fd);
@@ -27,9 +27,9 @@ void	write_to_pipe(int fd, char ***envs)
 
 char	**add_str(char **list, int *i)
 {
-	char 	**new;
+	char	**new;
 	int		j;
-	
+
 	(*i) = 0;
 	j = 0;
 	while (list[*i] != NULL)

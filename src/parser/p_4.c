@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_4.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:12:29 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/10 02:20:35 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 10:48:14 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	temp_strings(char *og, char **new, int a, int b)
 {
 	char	*first;
 	char	*secnd;
-	
+
 	first = NULL;
 	if (a != 0)
 		first = ft_substr(og, 0, a);
@@ -37,7 +37,6 @@ void	temp_strings(char *og, char **new, int a, int b)
 	else if (first && !secnd)
 		*new = first;
 }
-
 
 void	find_redirs(char *og, int *a, int *b, int *i)
 {
@@ -80,7 +79,7 @@ void	find_red_pos(t_chunk *chunk, int *i)
 		(*i) = a;
 		if (chunk->og[(*i) + 1]
 			&& ((chunk->og[*i] == '<' && chunk->og[(*i) + 1] == '<')
-			|| (chunk->og[*i] == '>' && chunk->og[(*i) + 1] == '>')))
+				|| (chunk->og[*i] == '>' && chunk->og[(*i) + 1] == '>')))
 			(*i)++;
 	}
 }

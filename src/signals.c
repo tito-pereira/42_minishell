@@ -49,11 +49,11 @@ void	check_mode_two(int mode, struct sigaction sa_dfl, \
 
 void	sig_handlerr(int mode)
 {
-	struct	sigaction	sa_repeat;
-	struct	sigaction	sa_hd_repeat;
-	struct	sigaction	sa_global;
-	struct	sigaction	sa_ign;
-	struct	sigaction	sa_dfl;
+	struct sigaction	sa_repeat;
+	struct sigaction	sa_hd_repeat;
+	struct sigaction	sa_global;
+	struct sigaction	sa_ign;
+	struct sigaction	sa_dfl;
 
 	sa_repeat.sa_handler = &sig_repeat;
 	sigemptyset(&sa_repeat.sa_mask);
