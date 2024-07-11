@@ -64,6 +64,7 @@ void	blt_action_outf(t_execlist *execl, int i, int *ret, char ***exec_str)
 	int	tmp;
 
 	n_file = execl->chunk[i]->nmb_outf;
+	tmp = 0;
 	if (execl->chunk[i]->app_dcs[n_file] == 1)
 		tmp = open(execl->chunk[i]->outfiles[n_file], \
 		O_RDWR | O_CREAT | O_APPEND, 0644);

@@ -72,6 +72,8 @@ int	chest_options(char **chest, int flag, char *str, int i)
 	if (flag == 0 && (str[i] == 9 || str[i] == 32
 			|| str[i] == '>' || str[i] == '<'))
 		return (0);
+	if (str[i] == 34 || str[i] == 39)
+		printf("str[i] = %c. flag = %d\n", str[i], flag);
 	if ((str[i] != 34 && str[i] != 39)
 		|| (str[i] == 34 && flag == 39)
 		|| (str[i] == 39 && flag == 34))
