@@ -12,6 +12,16 @@
 
 #include "../minishell.h"
 
+/*void	args_check(int argc, char **argv)
+{
+	(void)argv;
+	if (argc != 1)
+	{
+		ft_printf("minishell: ./minishell: no arguments required\n");
+		exit(1);
+	}
+}*/
+
 int	null_input(char *input)
 {
 	int	i;
@@ -48,13 +58,6 @@ int	ft_read(char **input, char ***env)
 		}
 	}
 }
-
-/*
-basicamente adicionar uma global check == 130 para ver se houve SIGINT
-mas eu acho que fica constantemente preso ali na readline nao?
-o sighandler apenas "adiciona" funcoes enquanto fica ali preso
-no heredoc por exemplo ele sai porque faz exit, mais facil
-*/
 
 char	**create_envp(void)
 {

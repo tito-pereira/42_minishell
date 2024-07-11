@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/10 03:51:55 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 02:16:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int			ft_read(char **input, char ***env);
 char		**create_envp(void);
 int			parse_central(t_execlist **execl, char *input, \
 			int *exit_stt, char ***env);
+//void		args_check(int argc, char **argv);
 
 // PRINTS
 void		print_db_char(char **str);

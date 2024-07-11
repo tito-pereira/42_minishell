@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:29:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/10 00:43:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 02:37:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,3 +115,21 @@ int	open_all_redirs(t_execlist *execl)
 	}
 	return (0);
 }
+
+/*
+
+
+redir erroc codes (also preencher nos testes a fazer)
+    - (nas redirs) ft_printf("minishell: non-existant file or path\n"), *exit_code = 127; ???
+    - (nas redirs) permission denied 126 ???
+(tinha 126 e mudei para 1)
+
+>> minishell: cat stuff >$HOME >$PWD >$USER
+minishell: unspecified file redirection error
+>> minishell: echo $?
+1
+minishell:~/jose$ cat >$HOME >$PWD >$USER
+minishell: /home/root_tito: Is a directory
+minishell:~/jose$ echo $?
+1
+*/

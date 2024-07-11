@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:04 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/11 01:51:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 02:45:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	ft_cd(char **cmd, char ***envp)
 	char	*home;
 
 	ret = 0;
-	if (cmd[1] && !cmd[2])
+	if (cmd[1] && ft_strncmp(cmd[1], "~", 3) != 0 && !cmd[2])
 		ret = set_dir (cmd[1], envp);
-	else if (!cmd[1])
+	else if ((!cmd[1]) || (ft_strncmp(cmd[1], "~", 3) == 0 && !cmd[2]))
 	{
 		home = get_home(*envp);
 		if (home)
