@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 04:42:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 07:40:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,6 @@ void	mini_exit(t_execlist **execl)
 */
 
 /*
-if ((parse_central(&execl, input, &exit_stt, &env) == 1)
-			&& (parser_success(&execl, &env) == 0))
-		{
-			if (parser_success(&execl, &env) == 0)
-				continue ;
-		}
 
 int	main(void)
 {
