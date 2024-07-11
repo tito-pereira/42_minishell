@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:34 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 00:32:29 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/11 16:19:59 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,3 @@ int	redir_checker(t_execlist *execl)
 	}
 	return (1);
 }
-
-/*
-- echo << > (non error)
-- echo >< (non error)
-(deveriam entrar no primeiro check error logo a seguir
-aos whitespaces mas nao entram)
-(no entanto, o erro ja aparecia se eu usasse pipes)
-
-o erro ta se a redir for mesmo o ultimo caractere
-eu acho que retorna NULL mas sem alterar propriamente o error stt
-*/

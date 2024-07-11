@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 17:44:12 by marvin            #+#    #+#              #
-#    Updated: 2024/07/10 03:53:18 by marvin           ###   ########.fr        #
+#    Updated: 2024/07/11 16:45:12 by tibarbos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ OBJ= $(OBJ_P) $(OBJ_E) $(OBJ_B) $(OBJ_M)
 
 # Include Libraries
 LIB_FT= -L./mylib -lft
-LIB_READ= -lreadline #-L/usr/lib/x86_64-linux-gnu
+LIB_READ= -lreadline
 LIBS= $(LIB_FT) $(LIB_READ)
 
 # Rules

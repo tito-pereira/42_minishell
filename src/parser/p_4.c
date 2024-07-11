@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:12:29 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 12:02:38 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:09:10 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,15 @@ void	temp_strings(char *og, char **new, int a, int b)
 	*new = NULL;
 	if (!first && secnd)
 		*new = secnd;
-	else if (first && secnd)
-	{
+	if (first && secnd)
 		*new = ft_strjoin(first, secnd);
-		free(first);
-		free(secnd);
-	}
-	else if (first && !secnd)
+	if (first && !secnd)
 		*new = first;
+	if (first)
+		free(first);
+	if (secnd)
+		free(secnd);
 }
-
-/*
-if first, free(first)
-if secnd, free(secnd)
-*/
 
 void	find_redirs(char *og, int *a, int *b, int *i)
 {
@@ -72,7 +67,7 @@ void	find_red_pos(t_chunk *chunk, int *i)
 	a = 0;
 	b = 0;
 	new = NULL;
-	if (chunk->og[*i] == '<' || chunk->og[*i] == '>')
+	if (chunk->og[*i] && (chunk->og[*i] == '<' || chunk->og[*i] == '>'))
 	{
 		find_redirs(chunk->og, &a, &b, i);
 		temp_strings(chunk->og, &new, a, b);
@@ -82,7 +77,7 @@ void	find_red_pos(t_chunk *chunk, int *i)
 			chunk->og = new;
 		}
 		(*i) = a;
-		if (chunk->og[(*i) + 1]
+		if ((*i) < ((int)ft_strlen(chunk->og) - 1) && chunk->og[(*i) + 1]
 			&& ((chunk->og[*i] == '<' && chunk->og[(*i) + 1] == '<')
 				|| (chunk->og[*i] == '>' && chunk->og[(*i) + 1] == '>')))
 			(*i)++;
@@ -101,7 +96,9 @@ int	scope_redirs(t_execlist *execl)
 	while (execl->chunk[++c] != NULL)
 	{
 		i = -1;
-		while (execl->chunk[c]->og[++i] != '\0')
+		while (++i < (int)ft_strlen(execl->chunk[c]->og)
+			&& execl->chunk[c]->og[i]
+			&& execl->chunk[c]->og[i] != '\0')
 		{
 			parser_quote_flags(execl->chunk[c]->og[i], &flag);
 			if (flag == 0)
