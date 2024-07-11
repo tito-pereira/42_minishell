@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 13:32:50 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:38:37 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	spec_char_chunk(t_execlist *execl, int j)
 		if (execl->chunk[j]->og[i] == '$' && flag == 1)
 		{
 			if (execl->chunk[j]->og[i + 1]
-				&& execl->chunk[j]->og[i + 1] != 32)
+				&& execl->chunk[j]->og[i + 1] != 32 \
+				&& execl->chunk[j]->og[i + 1] != 34)
 				h_env_var(&i, &execl->chunk[j]->og, execl);
 		}
 	}
@@ -53,7 +54,8 @@ int	spec_char_infiles(t_execlist *execl, int j)
 			if (execl->chunk[j]->infiles[inf][i] == '$' && flag == 1)
 			{
 				if (execl->chunk[j]->infiles[inf][i + 1]
-					&& execl->chunk[j]->infiles[inf][i + 1] != 32)
+					&& execl->chunk[j]->infiles[inf][i + 1] != 32 \
+					&& execl->chunk[j]->infiles[inf][i + 1] != 34)
 					h_env_var(&i, &execl->chunk[j]->infiles[inf], execl);
 			}
 		}
@@ -79,7 +81,8 @@ int	spec_char_outfiles(t_execlist *execl, int j)
 			if (execl->chunk[j]->outfiles[out][i] == '$' && flag == 1)
 			{
 				if (execl->chunk[j]->outfiles[out][i + 1]
-					&& execl->chunk[j]->outfiles[out][i + 1] != 32)
+					&& execl->chunk[j]->outfiles[out][i + 1] != 32 \
+					&& execl->chunk[j]->outfiles[out][i + 1] != 34)
 					h_env_var(&i, &execl->chunk[j]->outfiles[out], execl);
 			}
 		}
