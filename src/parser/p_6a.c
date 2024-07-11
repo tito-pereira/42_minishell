@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:40:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 10:57:36 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:26:41 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ char	**find_execve(char *name, int option)
 	env = NULL;
 	if (option == 1)
 	{
-		env = malloc(5 * sizeof(char *));
+		env = ft_calloc(4, sizeof(char *));
 		env[0] = ft_strdup("/usr/bin/find");
 		env[1] = ft_strdup(".");
 		env[2] = ft_strdup("-name");
 		env[3] = ft_strdup(name);
-		env[4] = NULL;
+		//env[4] = NULL;
 	}
 	else if (option == 2)
 	{
-		env = malloc(3 * sizeof(char *));
+		env = ft_calloc(2, sizeof(char *));
 		env[0] = ft_strdup("/usr/bin/which");
 		env[1] = ft_strdup(name);
-		env[2] = NULL;
+		//env[2] = NULL;
 	}
 	return (env);
 }
@@ -60,8 +60,7 @@ char	*get_path(char *name, int option)
 	int		pid;
 
 	fd = malloc(2 * sizeof(int));
-	if (pipe(fd) == -1)
-		return (NULL);
+	pipe(fd);
 	env = find_execve(name, option);
 	pid = fork();
 	if (pid == 0)
@@ -76,6 +75,7 @@ char	*get_path(char *name, int option)
 	close(fd[1]);
 	path = get_next_line(fd[0]);
 	close(fd[0]);
+	free(fd);
 	return (path);
 }
 

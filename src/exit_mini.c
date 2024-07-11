@@ -48,25 +48,33 @@ static int	is_only_zeros(char *cmd)
 	return (1);
 }
 
-void	ft_exit(char **cmd, t_execlist *execl)
+void	ft_exit(char **cmd, t_execlist **execl)
 {
 	unsigned long long	code;
 	int					sign;
 
 	sign = 1;
 	if (((!cmd[1]) || (!cmd[2] && is_only_zeros(cmd[1]) == 1))
-		&& execl->cmd_nmb == 1)
+		&& (*execl)->cmd_nmb == 1)
 	{
-		free_exec(execl, 2);
+		free_exec(*execl, 2);
 		exit(0);
 	}
-	if (!cmd[2] && is_valid_number(cmd[1], &sign) == 1 && execl->cmd_nmb == 1)
+	if (!cmd[2] && is_valid_number(cmd[1], &sign) == 1
+		&& (*execl)->cmd_nmb == 1)
 	{
 		code = ft_atol(cmd[1]);
 		code = ((code * sign) % 256 + 256) % 256;
-		free_exec(execl, 2);
+		free_exec(*execl, 2);
 		ft_printf("minishell: exited with error code: %d\n", code);
 		exit(code);
 	}
+	if (cmd[2])
+	{
+		ft_printf("minishell: exit: %s: too many arguments\n", cmd[2]);
+		*((*execl)->exit_stt) = 1;
+		return ;
+	}
 	ft_printf("minishell: exit: %s: Numeric argument required\n", cmd[1]);
+	*((*execl)->exit_stt) = 2;
 }

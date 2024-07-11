@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 11:07:36 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:24:33 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void		parser_quote_flags(char c, int *flag);
 int			h_env_var(int *i, char **chunk, t_execlist *execl);
 
 // GLOBAL SUPPORT
-void		ft_exit(char **cmd, t_execlist *execl);
+void		ft_exit(char **cmd, t_execlist **execl);
 char		**create_envp(void);
 void		close_pipes(t_execlist *execl, int **fd, int i, int mode);
 char		*rmv_newline(char *old);

@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 12:25:23 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:31:27 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	mini_exit(t_execlist **execl)
 	while (*execl && (*execl)->chunk[++i])
 	{
 		if (ft_strncmp((*execl)->chunk[i]->cmd_n_args[0], "exit", 9) == 0)
-			ft_exit((*execl)->chunk[0]->cmd_n_args, *execl);
+			ft_exit((*execl)->chunk[0]->cmd_n_args, execl);
 	}
 	if (*execl)
 		free_exec(*execl, 1);
