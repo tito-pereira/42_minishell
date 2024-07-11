@@ -83,12 +83,3 @@ void	ft_exit(char **cmd, t_execlist **execl)
 	}
 	exit_errors(execl, cmd);
 }
-
-/*if (cmd[2])
-	{
-		ft_printf("minishell: exit: %s: too many arguments\n", cmd[2]);
-		*((*execl)->exit_stt) = 1;
-		return ;
-	}
-	ft_printf("minishell: exit: %s: Numeric argument required\n", cmd[1]);
-	*((*execl)->exit_stt) = 2;*/
