@@ -39,7 +39,9 @@ OBJ_E= ${SRC_E:.c=.o}
 SRC_B= ./src/builtin/blt_central.c ./src/builtin/cd.c \
 	./src/builtin/echo.c ./src/builtin/env.c \
 	./src/builtin/export.c \
-	./src/builtin/pwd.c ./src/builtin/unset.c
+	./src/builtin/pwd.c ./src/builtin/unset.c \
+	./src/builtin/export_sup.c
+
 OBJ_B= ${SRC_B:.c=.o}
 
 SRC_M= ./src/free.c ./src/signals.c ./src/main.c \

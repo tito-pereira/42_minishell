@@ -77,10 +77,10 @@ int	ft_export(char **cmd, char ***envp)
 
 	i = 1;
 	if (!cmd[1])
-		ft_env(cmd, envp);
+		print_sorted_env(envp[0]);
 	while (cmd[i])
 	{
-		if (valid_var (cmd[i]) && ft_strchr (cmd[i], '='))
+		if (valid_var (cmd[i]))
 		{
 			var_pos = get_var_pos (cmd[i], *envp);
 			update_var (cmd[i], var_pos, envp);

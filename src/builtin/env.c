@@ -31,7 +31,8 @@ int	ft_env(char **cmd, char ***envp)
 		i = 0;
 		while (envp && *envp && envp[0][i])
 		{
-			ft_printf ("%s\n", envp[0][i]);
+			if (ft_strchr (envp[0][i], '='))
+				ft_printf ("%s\n", envp[0][i]);
 			i++;
 		}
 	}
