@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_5.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:51:26 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 14:25:16 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/12 14:53:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int	arg_separator(t_execlist *execl)
 			*(execl->exit_stt) = 1;
 			return (0);
 		}
+		//printf("final cmd & args[%c]:\n", c);
+		//printf("[0]: '%s'\n", execl->chunk[c]->cmd_n_args[0]);
+		//printf("[1]: '%s'\n", execl->chunk[c]->cmd_n_args[1]);
 	}
 	return (1);
 }

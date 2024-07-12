@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_4.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:12:29 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 17:09:10 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/12 14:53:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	temp_strings(char *og, char **new, int a, int b)
 	if (!first && secnd)
 		*new = secnd;
 	if (first && secnd)
+	{
 		*new = ft_strjoin(first, secnd);
+		free(first);
+		free(secnd);
+	}
 	if (first && !secnd)
 		*new = first;
-	if (first)
-		free(first);
-	if (secnd)
-		free(secnd);
 }
 
 void	find_redirs(char *og, int *a, int *b, int *i)
@@ -67,10 +67,13 @@ void	find_red_pos(t_chunk *chunk, int *i)
 	a = 0;
 	b = 0;
 	new = NULL;
+	//printf("find_red_pos: chunk->og[%d]: '%c'\n", *i, chunk->og[*i]);
 	if (chunk->og[*i] && (chunk->og[*i] == '<' || chunk->og[*i] == '>'))
 	{
 		find_redirs(chunk->og, &a, &b, i);
+		//printf("cut positions are from %d to %d\n", a, b);
 		temp_strings(chunk->og, &new, a, b);
+		//printf("new og is '%s'\n", new);
 		if (new)
 		{
 			free(chunk->og);
@@ -104,6 +107,7 @@ int	scope_redirs(t_execlist *execl)
 			if (flag == 0)
 				find_red_pos(execl->chunk[c], &i);
 		}
+		//printf("final chunk[%d]: '%s'\n", c, execl->chunk[c]->og);
 	}
 	return (1);
 }
