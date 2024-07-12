@@ -18,12 +18,12 @@ int	ft_env(char **cmd, char ***envp)
 
 	if (cmd[1] && cmd[1][0] == '-')
 	{
-		ft_printf("minishell: env does not accept any options\n");
+		ft_printf("minishell: env: does not accept any options\n");
 		return (125);
 	}
 	if (cmd[1])
 	{
-		ft_printf("env: '%s': No such file or directory\n", cmd[1]);
+		ft_printf("minishell: env: does not accept any arguments\n", cmd[1]);
 		return (127);
 	}
 	else
