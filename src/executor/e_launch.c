@@ -27,6 +27,7 @@ int	exec_launch(t_execlist *execl, int **fd, int i, char ***exec_str)
 	int	pid2;
 
 	sig_handlerr(5);
+	printf("in exec launch\n");
 	if ((i + 1) < execl->valid_cmds)
 	{
 		i++;
@@ -45,5 +46,6 @@ int	exec_launch(t_execlist *execl, int **fd, int i, char ***exec_str)
 		if ((i + 1) < execl->valid_cmds)
 			wait_and_get_code(execl, pid1);
 	}
+	printf("out exec launch\n");
 	exit ((*execl->exit_stt));
 }

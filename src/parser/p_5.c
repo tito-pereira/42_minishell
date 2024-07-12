@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:51:26 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/12 19:56:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/12 21:11:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	arg_separator(t_execlist *execl)
 			{
 				ft_printf("minishell: syntax error near unexpected token `|'\n");
 				*(execl->exit_stt) = 2;
+				return (0);
 			}
-			return (0);
+			return (1); // antes, 0
 		}
 		else if (ret == -1)
 		{

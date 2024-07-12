@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_loop.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:38:06 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 17:13:23 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:35:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	check_changes(t_chunk *chunk)
 	int	ret;
 
 	ret = 0;
+	if (!chunk->cmd_n_args)
+		return (0);
 	if (ft_strncmp(chunk->cmd_n_args[0], "cd", 3) == 0)
 		ret = 1;
 	if (ft_strncmp(chunk->cmd_n_args[0], "export", 7) == 0)
@@ -70,7 +72,9 @@ void	exec_action(t_execlist *execl, int **fd, int i, char ***exec_str)
 	int	ret;
 
 	ret = 0;
+	//printf("exec action\n"); //
 	sig_handlerr(4);
+	chk_emp_exec(execl, fd, i, exec_str); //
 	if (execl->chunk[i]->blt == 0)
 	{
 		exec_input(execl, fd, i);
@@ -97,6 +101,7 @@ int	exec_loop(t_execlist *execl, int **fd, char ***exec_str)
 	int	pid;
 
 	i = 0;
+	//printf("in exec loop\n"); //
 	if (execl->valid_cmds == 1 && check_changes(execl->chunk[0]) == 1)
 	{
 		execl->env_pipe = (int *)ft_calloc(2, sizeof(int));
@@ -115,5 +120,6 @@ int	exec_loop(t_execlist *execl, int **fd, char ***exec_str)
 	wait_and_get_code(execl, pid);
 	if (execl->valid_cmds == 1 && check_changes(execl->chunk[0]) == 1)
 		receive_new_env(&execl);
+	//printf("out exec loop\n"); //
 	return ((*execl->exit_stt));
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/12 18:33:46 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/12 22:32:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ void	mini_exit(t_execlist **execl)
 	i = -1;
 	if (g_sig == 130)
 		(*(*execl)->exit_stt) = 130;
-	if (*execl && (*execl)->cmd_nmb == 1
+	if (*execl && (*execl)->cmd_nmb == 1 && (*execl)->chunk[0]->cmd_n_args
 		&& ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "cd", 10) == 0)
 		(*(*execl)->exit_stt) = ft_cd((*execl)->chunk[0]->cmd_n_args, \
 		(*execl)->my_envp);
 	while (*execl && (*execl)->chunk[++i])
 	{
-		if (ft_strncmp((*execl)->chunk[i]->cmd_n_args[0], "exit", 9) == 0)
+		if ((*execl)->chunk[i]->cmd_n_args
+			&& ft_strncmp((*execl)->chunk[i]->cmd_n_args[0], "exit", 9) == 0)
 			ft_exit((*execl)->chunk[0]->cmd_n_args, execl);
 	}
 	if (*execl)
@@ -95,6 +96,38 @@ void	parser_fail(t_execlist **execl)
 	if (*execl)
 		free_exec(*execl, 1);
 }
+
+/*
+
+minha duvida agora, e se entrar no parser fail outro qualquer possivel erro de parser
+que por acaso ja tenha as redirs feitas?
+passa p1, faz redirs e expander, retira redirs, e depois da erro no cmd && args ou no
+invalid path ou caminho
+
+non_exist
+non_exist: command not found
+echo $?
+127
+
+non_exist >f1
+non_exist: command not found
+echo $?
+0 (e o file f1 foi criado)
+
+sera que continua a parser outros chunks ou sai logo desse?
+ya, continua nao só a parsar como a executar
+portanto, talvez um free + cmd_n_args = NULL
+retorna(1) para continuar a parsar os outros
+e mandar para o executor na mesma
+
+(leaks / erros
+fechar exec_strs que sejam nulos
+fechar todos os pipes quando o exec_action for nulo)
+fd && exec_str sao alocados em nº de valid_cmds que é decidido no p1, ou seja,
+qualquer que seja o pipe, vazio ou nao, vai ter um fd e exec_str alocado
+
+p5, p6, e_main(exec_str), e_loop(exec_action), chk_emp_exec
+*/
 
 int	main(int argc, char **argv)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_6.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:35:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 14:33:22 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:01:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ int	check_p6_error(t_execlist *execl, int i, int r)
 	{
 		ft_printf("%s: invalid command\n", \
 		execl->chunk[i]->cmd_n_args[0]);
+		if (execl->chunk[i]->infiles || execl->chunk[i]->outfiles)
+		{
+			if (execl->chunk[i]->cmd_n_args)
+				free_db_str(execl->chunk[i]->cmd_n_args);
+			execl->chunk[i]->cmd_n_args = NULL;
+			return (1);
+		}
 		*(execl->exit_stt) = 127;
 		return (0);
 	}
@@ -67,6 +74,8 @@ int	arg_id(t_execlist *execl)
 	{
 		if (i == 0)
 			execl->chunk[i]->inpipe = 1;
+		if (execl->chunk[i] && !execl->chunk[i]->cmd_n_args) //
+			continue ; //
 		if (check_absolute(execl->chunk[i]) == 0)
 		{
 			execl->chunk[i]->blt = \

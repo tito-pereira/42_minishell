@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/12 17:59:27 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/12 21:30:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void		write_infile(t_execlist *execl, int **fd, int i, int *nfd);
 void		blt_action_outf(t_execlist *execl, int i, \
 			int *ret, char ***exec_str);
 void		receive_new_env(t_execlist **execl);
+void		chk_emp_exec(t_execlist *execl, int **fd, int i, char ***exec_str);
 
 // FREE
 char		*free_str(char *str);

@@ -84,3 +84,12 @@ void	receive_new_env(t_execlist **execl)
 	(*execl)->my_envp = read_from_pipe((*execl)->env_pipe[0], *execl);
 	close((*execl)->env_pipe[0]);
 }
+
+void	chk_emp_exec(t_execlist *execl, int **fd, int i, char ***exec_str)
+{
+	if (!exec_str[i])
+	{
+		close_pipes(execl, fd, i, 3);
+		exit(0);
+	}
+}

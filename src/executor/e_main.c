@@ -31,7 +31,8 @@ void	end_exec(t_execlist *execl, int **fd, char ***exec_str)
 	i = -1;
 	while (++i < execl->valid_cmds)
 	{
-		exec_str[i] = free_db_str(exec_str[i]);
+		if (exec_str[i] != NULL) //
+			exec_str[i] = free_db_str(exec_str[i]);
 		close(fd[i][0]);
 		close(fd[i][1]);
 		free(fd[i]);
@@ -49,9 +50,15 @@ void	get_exec_str(t_execlist *execl, char ***exec_str)
 	while (execl->chunk[++c] != NULL)
 	{
 		i = 0;
+		if (!execl->chunk[c]->cmd_n_args) //
+		{
+			//printf("empty str\n"); //
+			exec_str[c] = NULL; //
+			continue ; //
+		}
 		while (execl->chunk[c]->cmd_n_args[i] != NULL)
 			i++;
-		exec_str[c] = malloc((i + 1) * sizeof(char *));
+		exec_str[c] = (char **)ft_calloc((i + 1), sizeof(char *)); //
 		i = -1;
 		while (execl->chunk[c]->cmd_n_args[++i] != NULL)
 			exec_str[c][i] = ft_strdup(execl->chunk[c]->cmd_n_args[i]);
@@ -78,6 +85,8 @@ int	exec_main(t_execlist *execl)
 
 	fd = (int **)ft_calloc(execl->valid_cmds, sizeof(int *));
 	exec_str = (char ***)ft_calloc(execl->valid_cmds, sizeof(char **));
+	//printf("exec main\n"); //
+	//printf("valid cmds %d\n", execl->valid_cmds); //
 	if (!fd || !exec_str)
 	{
 		if (fd)
@@ -91,5 +100,6 @@ int	exec_main(t_execlist *execl)
 	get_exec_str(execl, exec_str);
 	exec_loop(execl, fd, exec_str);
 	end_exec(execl, fd, exec_str);
+	//printf("out exec main\n"); //
 	return (1);
 }
