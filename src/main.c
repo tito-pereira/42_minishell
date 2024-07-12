@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/12 18:19:25 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/12 18:33:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,18 @@ void	parser_fail(t_execlist **execl)
 {
 	int	c;
 
-	c = -1;
-	/*printf("in parser fails\n");
-	if (*execl)
+	c = 0;
+	//printf("in parser fails\n");
+	/*if (*execl)
 		printf("execl exists mf\n");
-	if ((*execl)->chunk[0])
+	if ((*execl)->chunk[c])
 		printf("first chunk exists mf\n");*/
-	while (*execl && (*execl)->chunk[++c]
+	while (*execl && (*execl)->chunk && (*execl)->chunk[c] 
 		&& ((*execl)->chunk[c]->infiles || (*execl)->chunk[c]->outfiles ))
 	{
 		//printf("will try to open\n");
 		open_all_redirs(*execl);
+		c++;
 	}
 	if (*execl)
 		free_exec(*execl, 1);
