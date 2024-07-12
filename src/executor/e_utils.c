@@ -87,6 +87,14 @@ void	receive_new_env(t_execlist **execl)
 
 void	chk_emp_exec(t_execlist *execl, int **fd, int i, char ***exec_str)
 {
+	int	ret;
+	
+	ret = open_redirs(execl, i);
+	if (ret != 0)
+	{
+		close_pipes(execl, fd, i, 3);
+		exit(ret);
+	}
 	if (!exec_str[i])
 	{
 		close_pipes(execl, fd, i, 3);

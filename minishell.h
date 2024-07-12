@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/12 21:30:41 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/13 00:11:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void		temp_pipe(int *nfd, char *buff);
 char		*empty_pipe(int fd, t_execlist *execl, int i);
 char		***read_from_pipe(int fd, t_execlist *execl);
 void		write_to_pipe(int fd, char ***envs);
-int			open_all_redirs(t_execlist *execl);
+int			open_redirs(t_execlist *execl, int c);
 void		get_exit_code(int status, int *exit_code);
 void		write_heredoc(t_execlist *execl, int **fd, int i, int *nfd);
 void		write_infile(t_execlist *execl, int **fd, int i, int *nfd);

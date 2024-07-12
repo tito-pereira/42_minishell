@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:51:26 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/12 21:11:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/12 23:26:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int	arg_separator(t_execlist *execl)
 				*(execl->exit_stt) = 2;
 				return (0);
 			}
-			return (1); // antes, 0
+			//printf("chunk %d is empty\n", c);
+			//return (1); // antes, 0
+			continue ;
 		}
 		else if (ret == -1)
 		{

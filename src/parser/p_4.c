@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:12:29 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/12 14:53:06 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/13 01:22:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,21 @@ void	temp_strings(char *og, char **new, int a, int b)
 	first = NULL;
 	if (a != 0)
 		first = ft_substr(og, 0, a);
+	/*if (first)
+		printf("first is '%s'\n", first);
+	else
+		printf("first is NULL\n");*/
 	secnd = NULL;
-	if ((b + 1) != (int)ft_strlen(og))
+	if (b <= (int)ft_strlen(og))
+	{
+		//printf("secnd will attempt substr\n");
 		secnd = ft_substr(og, b, ((int)ft_strlen(og) - b));
+	}
+	//printf("og '%s', b %d, strlen %d\n", og, b, ((int)ft_strlen(og)));
+	/*if (secnd)
+		printf("secnd is '%s'\n", secnd);
+	else
+		printf("secnd is NULL\n");*/
 	*new = NULL;
 	if (!first && secnd)
 		*new = secnd;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/12 22:32:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/13 00:11:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,16 @@ int	parser_success(t_execlist **execl, char ***env)
 	return (1);
 }
 
-void	parser_fail(t_execlist **execl)
+/*void	parser_fail(t_execlist **execl)
 {
 	int	c;
 
 	c = 0;
 	//printf("in parser fails\n");
-	/*if (*execl)
+	if (*execl)
 		printf("execl exists mf\n");
 	if ((*execl)->chunk[c])
-		printf("first chunk exists mf\n");*/
+		printf("first chunk exists mf\n");
 	while (*execl && (*execl)->chunk && (*execl)->chunk[c] 
 		&& ((*execl)->chunk[c]->infiles || (*execl)->chunk[c]->outfiles ))
 	{
@@ -95,14 +95,17 @@ void	parser_fail(t_execlist **execl)
 	}
 	if (*execl)
 		free_exec(*execl, 1);
-}
+}*/
 
 /*
 
-minha duvida agora, e se entrar no parser fail outro qualquer possivel erro de parser
-que por acaso ja tenha as redirs feitas?
-passa p1, faz redirs e expander, retira redirs, e depois da erro no cmd && args ou no
-invalid path ou caminho
+>f1 >f2 >f3
+reprova no p6, vem ter ao parser fail
+mas nao devia né
+ya acho que posso tirar o parser fail
+vai como um solo chunk NULL ao executor
+assim este mecanismo permite que esta condicao especial de
+empty pipe com redirs nao interfira na execucao de outros pipes
 
 non_exist
 non_exist: command not found
@@ -148,9 +151,9 @@ int	main(int argc, char **argv)
 		}
 		else
 		{
-			parser_fail(&execl);
-			//if (execl)
-				//free_exec(execl, 1);
+			//parser_fail(&execl);
+			if (execl)
+				free_exec(execl, 1);
 			continue ;
 		}
 		mini_exit(&execl);

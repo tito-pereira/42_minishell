@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:38:06 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/12 22:35:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/13 00:30:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,19 @@ void	exec_action(t_execlist *execl, int **fd, int i, char ***exec_str)
 	int	ret;
 
 	ret = 0;
-	//printf("exec action\n"); //
+	//printf("exec action %d\n", i); //
 	sig_handlerr(4);
 	chk_emp_exec(execl, fd, i, exec_str); //
-	if (execl->chunk[i]->blt == 0)
+	if (execl->chunk[i]->blt == 0) // && ret == 0
 	{
+		//printf("execve %d\n", i); //
 		exec_input(execl, fd, i);
 		exec_output(execl, fd, i);
+		//printf("GOGO %d\n", i); //
 		ret = execve(exec_str[i][0], exec_str[i], (*execl->my_envp));
 		get_act_err_code(exec_str[i][0]);
 	}
-	else if (execl->chunk[i]->blt == 1)
+	else if (execl->chunk[i]->blt == 1) // && ret == 0
 	{
 		ret = blt_action(execl, fd, i, exec_str);
 		if (execl->valid_cmds == 1 && check_changes(execl->chunk[0]) == 1)
@@ -107,9 +109,9 @@ int	exec_loop(t_execlist *execl, int **fd, char ***exec_str)
 		execl->env_pipe = (int *)ft_calloc(2, sizeof(int));
 		pipe(execl->env_pipe);
 	}
-	open_all_redirs(execl);
-	if ((*execl->exit_stt) != 0)
-		return ((*execl->exit_stt));
+	//open_all_redirs(execl);
+	//if ((*execl->exit_stt) != 0)
+		//return ((*execl->exit_stt));
 	pid = fork();
 	if (pid == 0)
 	{
