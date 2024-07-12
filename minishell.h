@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 14:24:33 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/12 17:59:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int			parse_central(t_execlist **execl, char *input, \
 // PRINTS
 void		print_db_char(char **str);
 void		print_db(char **str);
+void	support_print(t_execlist *execl, int c);
 
 // SIGNAL HANDLING
 void		sig_global(int num);

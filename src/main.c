@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 14:31:27 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:19:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,26 @@ int	parser_success(t_execlist **execl, char ***env)
 	return (1);
 }
 
+void	parser_fail(t_execlist **execl)
+{
+	int	c;
+
+	c = -1;
+	/*printf("in parser fails\n");
+	if (*execl)
+		printf("execl exists mf\n");
+	if ((*execl)->chunk[0])
+		printf("first chunk exists mf\n");*/
+	while (*execl && (*execl)->chunk[++c]
+		&& ((*execl)->chunk[c]->infiles || (*execl)->chunk[c]->outfiles ))
+	{
+		//printf("will try to open\n");
+		open_all_redirs(*execl);
+	}
+	if (*execl)
+		free_exec(*execl, 1);
+}
+
 int	main(int argc, char **argv)
 {
 	char			*input;
@@ -94,8 +114,9 @@ int	main(int argc, char **argv)
 		}
 		else
 		{
-			if (execl)
-				free_exec(execl, 1);
+			parser_fail(&execl);
+			//if (execl)
+				//free_exec(execl, 1);
 			continue ;
 		}
 		mini_exit(&execl);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:51:26 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/12 14:53:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/12 18:18:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	arg_separator(t_execlist *execl)
 		ret = cmd_separator(execl->chunk[c]);
 		if (ret == 0)
 		{
-			ft_printf("minishell: syntax error near unexpected token `|'\n");
+			if (!execl->chunk[c]->infiles && !execl->chunk[c]->outfiles)
+				ft_printf("minishell: syntax error near unexpected token `|'\n");
 			*(execl->exit_stt) = 2;
 			return (0);
 		}

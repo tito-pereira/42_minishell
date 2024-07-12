@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:34 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 16:19:59 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:12:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	redir_checker(t_execlist *execl)
 		}
 		if (flag != 0 && unc_qts_err(&execl) == 0)
 			return (0);
+		//support_print(execl, c);
 	}
 	return (1);
 }

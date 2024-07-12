@@ -31,7 +31,7 @@ void	print_db(char **str)
 	int i = -1;
 	while (str[++i] != NULL)
 		ft_printf("%s\n", str[i]);
-}
+}*/
 
 void	support_print(t_execlist *execl, int c)
 {
@@ -61,4 +61,3 @@ void	support_print(t_execlist *execl, int c)
 			printf("%d\n", execl->chunk[c]->app_dcs[i]);
 	}
 }
-*/
