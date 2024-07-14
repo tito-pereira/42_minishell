@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:15 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/14 17:37:47 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/14 18:12:19 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	new_var_pos(char **envp)
 	int	i;
 
 	i = 0;
-	printf("new var pos\n");
+	//printf("new var pos\n");
 	while (envp[i])
 		i++;
 	return (i);
@@ -49,8 +49,11 @@ static int	get_var_pos(char *var, char **envp)
 	int		var_len;
 	int		var_pos;
 
-	printf("exist var pos\n");
-	var_len = ft_strchr (var, '=') - var;
+	//printf("exist var pos\n");
+	if (ft_strchr (var, '='))
+		var_len = ft_strchr (var, '=') - var;
+	else
+		var_len = ft_strlen(var);
 	//printf("2, var len %d\n", var_len);
 	var_pos = 0;
 	var_temp = ft_calloc (var_len + 1, sizeof (char)); //+ 2
@@ -70,9 +73,21 @@ static int	get_var_pos(char *var, char **envp)
 
 /*
 tenho que mudar este while loop aqui, perceber porque nao reconhece as minhas
-
 tem a ver com a questao do +1 ou +2
 */
+
+int	var_has_eq(char *var)
+{
+	int	i;
+
+	i = -1;
+	while (var[++i] != '\0')
+	{
+		if (var[i] == '=')
+			return (1);
+	}
+	return (0);
+}
 
 static void	update_var(char *var, int var_pos, char ***envp)
 {
@@ -89,10 +104,17 @@ static void	update_var(char *var, int var_pos, char ***envp)
 	}
 	else
 	{
-		envp[0][var_pos] = free_str (envp[0][var_pos]);
-		envp[0][var_pos] = ft_strdup (var);
+		if (var_has_eq(var) == 1)
+		{
+			envp[0][var_pos] = free_str (envp[0][var_pos]);
+			envp[0][var_pos] = ft_strdup (var);
+		}
 	}
 }
+
+/*
+nao pode dar update se o novo nao possuir =
+*/
 
 static int	valid_var(char *var)
 {
@@ -120,25 +142,25 @@ int	ft_export(char **cmd, char ***envp)
 	int	var_pos;
 
 	i = 1;
-	printf("in export\n");
+	//printf("in export\n");
 	if (!cmd[1])
 	{
-		printf("!cmd[1]\n");
+		//printf("!cmd[1]\n");
 		print_sorted_env(envp[0]);
 	}
 	while (cmd[i])
 	{
-		printf("looping cmd[%d] = '%s'\n", i, cmd[i]);
+		//printf("looping cmd[%d] = '%s'\n", i, cmd[i]);
 		if (valid_var (cmd[i]) == 1)
 		{
-			printf("is valid\n");
+			//printf("is valid\n");
 			if (check_exist(*envp, cmd[i]) == 1)
 				var_pos = get_var_pos (cmd[i], *envp);
 			else
 				var_pos = new_var_pos(*envp);
-			printf("pos got: %d\n", var_pos);
+			//printf("pos got: %d\n", var_pos);
 			update_var (cmd[i], var_pos, envp);
-			printf("updated\n");
+			//printf("updated\n");
 		}
 		else //if (!valid_var (cmd[i]))
 		{
@@ -147,18 +169,20 @@ int	ft_export(char **cmd, char ***envp)
 		}
 		i++;
 	}
-	printf("out export\n");
+	//printf("out export\n");
 	return (0);
 }
 
 /*
-(?) adiciona novo
-	export new ?
-	export mode=ertr ?
 
-(?) substitui existentes + novos
 
-unset nao funciona.. puta que pariu este gajo fodasse
+apenas testar isto
+e depois unset
+e o path deve comecar a dar direito
+
+export new size mode
+export new size mode
+ja ficou a dar (erro da get_var_pos)
 
 ja vejo os erros de export em termos de args e o crl
 */

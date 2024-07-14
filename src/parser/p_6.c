@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_6.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:35:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/14 03:08:22 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/14 22:12:01 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,11 @@ int	check_builtin(char *arg)
 	return (0);
 }
 
+/*
 int	check_empty(t_execlist *execl, int i)
 {
 	printf("check empty %d\n", i);
 	printf("'%s'\n", execl->chunk[i]->cmd_n_args[0]);
-	/*if (execl->chunk[i]->cmd_n_args)
-		printf("step 1\n");
-	if (execl->chunk[i]->cmd_n_args[0])
-		printf("step 2\n");
-	if (execl->chunk[i]->cmd_n_args[0] == NULL)
-		printf("step 3\n");*/
-	//&& execl->chunk[i]->cmd_n_args[0]
 	if (execl->chunk[i]->cmd_n_args && execl->chunk[i]->cmd_n_args[0] == NULL)
 	{
 		ft_printf("'': invalid command\n", \
@@ -70,7 +64,7 @@ int	check_empty(t_execlist *execl, int i)
 		return (0);
 	}
 	return (1);
-}
+}*/
 
 void	check_p6_error(t_execlist *execl, int i, int r)
 {
@@ -110,9 +104,9 @@ int	arg_id(t_execlist *execl)
 			execl->chunk[i]->blt = \
 			check_builtin(execl->chunk[i]->cmd_n_args[0]);
 			if (execl->chunk[i]->blt == 1)
-				r = chunk_id(execl->chunk[i], 1);
+				r = chunk_id(execl->chunk[i], 1, execl);
 			else if (execl->chunk[i]->blt == 0)
-				r = chunk_id(execl->chunk[i], 2);
+				r = chunk_id(execl->chunk[i], 2, execl);
 			check_p6_error(execl, i, r); //if == 0, return 0
 		}
 	}

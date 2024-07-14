@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 17:44:12 by marvin            #+#    #+#              #
-#    Updated: 2024/07/13 01:35:23 by marvin           ###   ########.fr        #
+#    Updated: 2024/07/14 22:30:59 by tibarbos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC_P= ./src/parser/p_1.c ./src/parser/p_1a.c \
 	./src/parser/p_3_utils.c \
 	./src/parser/p_4.c \
 	./src/parser/p_5.c ./src/parser/p_5a.c \
-	./src/parser/p_6.c ./src/parser/p_6a.c
+	./src/parser/p_6.c ./src/parser/p_6a.c ./src/parser/p_6b.c
 OBJ_P= ${SRC_P:.c=.o}
 
 SRC_E= ./src/executor/e_main.c ./src/executor/e_loop.c \

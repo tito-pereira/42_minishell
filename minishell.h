@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/14 15:46:35 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:30:11 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,14 @@ char		*heredoc_read(char *lim);
 char		*new_chnk(char *spec, char *old, int a, int b);
 int			cmd_separator(t_chunk *chunk);
 void		add_arg(t_chunk *chunk, char **str);
-int			chunk_id(t_chunk *chunk, int opt);
+int			chunk_id(t_chunk *chunk, int opt, t_execlist *execl);
 char		*search_my_envp(t_execlist *execl, char *env_name);
 void		updt_rdr_lst(t_chunk *chunk, int in_out, int flag, char *n_str);
 void		parser_quote_flags(char c, int *flag);
 int			h_env_var(int *i, char **chunk, t_execlist *execl);
+char		*rmv_newline(char *old);
+char		*get_path(char *name, char *path, t_execlist *execl);
+char		*find_path(char	*arg, t_execlist *execl);
 
 // GLOBAL SUPPORT
 void		ft_exit(char **cmd, t_execlist **execl);
