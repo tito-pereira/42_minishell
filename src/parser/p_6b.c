@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 22:26:42 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/14 23:11:33 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:13:09 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*the_last(t_execlist *execl, char *arg, int j, int *a)
 	int		b;
 	
 	i = 5;
+	b = 5;
 	while (execl->my_envp[0][j][++i] && execl->my_envp[0][j][i] != '\0')
 		b++;
 	if (*a != i)
