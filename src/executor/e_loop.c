@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:38:06 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/13 00:30:15 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/14 00:56:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,11 @@ int	exec_loop(t_execlist *execl, int **fd, char ***exec_str)
 	int	pid;
 
 	i = 0;
-	//printf("in exec loop\n"); //
 	if (execl->valid_cmds == 1 && check_changes(execl->chunk[0]) == 1)
 	{
 		execl->env_pipe = (int *)ft_calloc(2, sizeof(int));
 		pipe(execl->env_pipe);
 	}
-	//open_all_redirs(execl);
-	//if ((*execl->exit_stt) != 0)
-		//return ((*execl->exit_stt));
 	pid = fork();
 	if (pid == 0)
 	{
@@ -119,9 +115,11 @@ int	exec_loop(t_execlist *execl, int **fd, char ***exec_str)
 		exit(0);
 	}
 	close_pipes(execl, fd, i, 3);
+	i = (*execl->exit_stt); //
 	wait_and_get_code(execl, pid);
+	if (i != 0 && (*execl->exit_stt) == 0) //
+		(*execl->exit_stt) = i; //
 	if (execl->valid_cmds == 1 && check_changes(execl->chunk[0]) == 1)
 		receive_new_env(&execl);
-	//printf("out exec loop\n"); //
 	return ((*execl->exit_stt));
 }

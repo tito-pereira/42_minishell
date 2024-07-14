@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:34 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/12 23:23:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/13 15:16:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	redir_checker(t_execlist *execl)
 		}
 		if (flag != 0 && unc_qts_err(&execl) == 0)
 			return (0);
-		//support_print(execl, c);
+		//support_print(execl, c); //
 	}
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_5a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:45:01 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 12:33:22 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/13 15:08:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,20 @@ int	non_white(char **chest, t_chunk *chunk, int *i)
 	*chest = NULL;
 	while (chunk->og[*i] != '\0')
 	{
+		//printf("parsing %c\n", chunk->og[*i]);
 		parser_quote_flags(chunk->og[*i], &flag);
 		if (separator_options(chest, flag, chunk->og, *i) == 0)
+		{
+			//printf("will break\n");
 			break ;
+		}
 		(*i)++;
 	}
 	if (flag != 0)
+	{
+		//printf("flag was %d\n", flag);
 		return (-1);
+	}
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_6a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:40:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 15:46:31 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:25:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*get_path(char *name, int option)
 	int		pid;
 
 	fd = malloc(2 * sizeof(int));
+	//printf("get_path for '%s'\n", name); //
 	pipe(fd);
 	env = find_execve(name, option);
 	pid = fork();

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:51:26 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/12 23:26:42 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/14 02:02:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,35 @@ int	arg_separator(t_execlist *execl)
 	return (1);
 }
 
+void	create_cmds(t_chunk *chunk, char **str)
+{
+	//printf("create\n");
+	chunk->cmd_n_args = malloc(2 * sizeof(char *));
+	chunk->cmd_n_args[0] = *str;
+	if (chunk->cmd_n_args[0] == NULL)
+		chunk->cmd_n_args[0] = ft_strdup("");
+	chunk->cmd_n_args[1] = NULL;
+}
+
 void	add_arg(t_chunk *chunk, char **str)
 {
 	int		c;
 	char	**new;
 
-	c = 0;
+	c = 0; //0
+	//printf("adding '%s' string\n", *str);
 	if (chunk->cmd_n_args == NULL)
 	{
-		chunk->cmd_n_args = malloc(2 * sizeof(char *));
+		create_cmds(chunk, str);
+		/*chunk->cmd_n_args = malloc(2 * sizeof(char *));
 		chunk->cmd_n_args[0] = *str;
-		chunk->cmd_n_args[1] = NULL;
+		if (chunk->cmd_n_args[0] == NULL)
+			chunk->cmd_n_args[0] = ft_strdup("");
+		chunk->cmd_n_args[1] = NULL;*/
 	}
 	else
 	{
+		//printf("exist\n");
 		while (chunk->cmd_n_args[c] != NULL)
 			c++;
 		new = malloc((c + 2) * sizeof(char *));

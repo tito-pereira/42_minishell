@@ -22,7 +22,8 @@ void	get_positions(int *a, int *b, int *i, char *chunk)
 		return ;
 	}
 	while (chunk[*i] != 9 && chunk[*i] != 32 && chunk[*i] != '$'
-		&& chunk[*i] != '\0' && chunk[*i] != 34 && chunk[*i] != '\n')
+		&& chunk[*i] != '\0' && chunk[*i] != 34 && chunk[*i] != '\n'
+		&& chunk[*i] != 39)
 		(*i)++;
 	*b = (*i) - 1;
 }

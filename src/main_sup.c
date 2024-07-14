@@ -84,6 +84,8 @@ int	parse_central(t_execlist **execl, char *input, int *exit_stt, char ***env)
 	//printf("p4 done with %d\n", flag);
 	if (flag == 1)
 		flag = arg_separator(*execl);
+	if (flag == 1) //
+		*exit_stt = 0; //
 	//printf("p5 done with %d\n", flag);
 	if (flag == 1)
 		flag = arg_id(*execl);

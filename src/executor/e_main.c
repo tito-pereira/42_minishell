@@ -85,7 +85,7 @@ int	exec_main(t_execlist *execl)
 
 	fd = (int **)ft_calloc(execl->valid_cmds, sizeof(int *));
 	exec_str = (char ***)ft_calloc(execl->valid_cmds, sizeof(char **));
-	//printf("in exec main\n\n\n"); //
+	//printf("in exec main stt %d\n", (*execl->exit_stt)); //
 	//printf("valid cmds %d\n", execl->valid_cmds); //
 	if (!fd || !exec_str)
 	{
@@ -100,6 +100,6 @@ int	exec_main(t_execlist *execl)
 	get_exec_str(execl, exec_str);
 	exec_loop(execl, fd, exec_str);
 	end_exec(execl, fd, exec_str);
-	//printf("\n\n\nout exec main\n"); //
+	//printf("out exec main stt %d\n", (*execl->exit_stt)); //
 	return (1);
 }
