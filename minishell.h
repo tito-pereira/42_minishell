@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/13 00:11:33 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/14 15:46:35 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int			ft_cd(char **cmd, char ***env);
 void		ft_echo(char **cmd);
 int			ft_env(char **cmd, char ***envp);
 int			ft_export(char **cmd, char ***envp);
-void		ft_pwd(char **cmd, char **envp);
+int			ft_pwd(char **cmd, char **envp);
 void		ft_unset(char **cmd, char ***envp);
 void 		print_sorted_env(char **env);
 

@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:19 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/11 14:29:36 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/14 17:04:18 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,7 @@ void	ft_unset(char **cmd, char ***envp)
 	while (*(++cmd))
 		remove_var (*cmd, envp);
 }
+
+/*
+nao ta a funcionar
+*/

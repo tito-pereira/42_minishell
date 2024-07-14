@@ -67,7 +67,11 @@ char	*heredoc_rd(char *lim)
 	{
 		input = readline("heredoc> ");
 		if (!input)
+		{
+			ft_printf("minishell: warning: here-document delimited by ");
+			ft_printf("end-of-file (wanted `%s')\n", lim);
 			return (NULL);
+		}
 		if (ft_strncmp(lim, input, 4096) == 0)
 		{
 			free(input);

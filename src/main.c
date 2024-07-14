@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/14 01:19:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/14 14:36:34 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	mini_exit(t_execlist **execl)
 	int	i;
 
 	i = -1;
-	if (g_sig == 130)
-		(*(*execl)->exit_stt) = 130;
+	if (g_sig == 130 || g_sig == 131)
+		(*(*execl)->exit_stt) = g_sig;
+	if (g_sig == 131)
+		ft_printf("Quit (core dumped)\n");
 	if (*execl && (*execl)->cmd_nmb == 1 && (*execl)->chunk[0]->cmd_n_args
 		&& ft_strncmp((*execl)->chunk[0]->cmd_n_args[0], "cd", 10) == 0)
 		(*(*execl)->exit_stt) = ft_cd((*execl)->chunk[0]->cmd_n_args, \
