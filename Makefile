@@ -6,7 +6,7 @@
 #    By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 17:44:12 by marvin            #+#    #+#              #
-#    Updated: 2024/07/14 22:30:59 by tibarbos         ###   ########.fr        #
+#    Updated: 2024/07/15 12:51:37 by tibarbos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,7 @@ SRC_B= ./src/builtin/blt_central.c ./src/builtin/cd.c \
 	./src/builtin/echo.c ./src/builtin/env.c \
 	./src/builtin/export.c \
 	./src/builtin/pwd.c ./src/builtin/unset.c \
-	./src/builtin/export_sup.c
-
+	./src/builtin/export_sup.c ./src/builtin/export_sup2.c
 OBJ_B= ${SRC_B:.c=.o}
 
 SRC_M= ./src/free.c ./src/signals.c ./src/main.c \

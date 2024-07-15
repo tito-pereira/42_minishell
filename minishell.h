@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/14 22:30:11 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/15 12:52:36 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			parse_central(t_execlist **execl, char *input, \
 // PRINTS
 void		print_db_char(char **str);
 void		print_db(char **str);
-void	support_print(t_execlist *execl, int c);
+void		support_print(t_execlist *execl, int c);
 
 // SIGNAL HANDLING
 void		sig_global(int num);
@@ -164,6 +164,9 @@ int			ft_env(char **cmd, char ***envp);
 int			ft_export(char **cmd, char ***envp);
 int			ft_pwd(char **cmd, char **envp);
 void		ft_unset(char **cmd, char ***envp);
-void 		print_sorted_env(char **env);
+void		print_sorted_env(char **env);
+int			check_exist(char **envp, char *var);
+int			new_var_pos(char **envp);
+int			var_has_eq(char *var);
 
 #endif

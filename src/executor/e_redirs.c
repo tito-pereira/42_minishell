@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_redirs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:29:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/13 00:08:06 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/15 12:45:32 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	open_all_outfs(t_chunk *c, t_execlist *execl)
 }
 
 int	open_redirs(t_execlist *execl, int c)
-{ 
+{
 	if (execl->chunk[c]->infiles != NULL)
 	{
 		if (open_all_infs(execl->chunk[c], execl) != 0)
@@ -109,28 +109,3 @@ int	open_redirs(t_execlist *execl, int c)
 	}
 	return (0);
 }
-
-
-/*
-int	open_all_redirs(t_execlist *execl)
-{
-	int	c;
-
-	c = -1;
-	while (execl->chunk[++c])
-	{
-		if (execl->chunk[c]->infiles != NULL)
-		{
-			if (open_all_infs(execl->chunk[c], execl) != 0)
-				return ((*execl->exit_stt));
-		}
-		if (execl->chunk[c]->outfiles != NULL)
-		{
-			if (open_all_outfs(execl->chunk[c], execl) != 0)
-				return ((*execl->exit_stt));
-		}
-	}
-	return (0);
-}
-
-*/

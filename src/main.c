@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/14 14:36:34 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/15 12:47:46 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	mini_exit(t_execlist **execl)
 
 int	parser_success(t_execlist **execl, char ***env)
 {
-	//(*(*execl)->exit_stt) = 0; //
 	g_sig = 128;
 	exec_main(*execl);
 	if ((*execl)->exit_stt && (*(*execl)->exit_stt) == 0)

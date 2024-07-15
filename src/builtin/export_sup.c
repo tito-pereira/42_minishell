@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_sup.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/15 12:34:29 by tibarbos          #+#    #+#             */
+/*   Updated: 2024/07/15 12:36:38 by tibarbos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../minishell.h"
 
-void swap(char **a, char **b)
+void	swap(char **a, char **b)
 {
-	char    *temp;
+	char	*temp;
 
 	temp = *a;
 	*a = *b;
 	*b = temp;
 }
 
-void sort_env(char **env_copy, int count)
+void	sort_env(char **env_copy, int count)
 {
-	int     i;
-	int     j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < count - 1)
@@ -28,7 +40,7 @@ void sort_env(char **env_copy, int count)
 	}
 }
 
-void print_sorted_env(char **env)
+void	print_sorted_env(char **env)
 {
 	int		count;
 	char	**env_copy;

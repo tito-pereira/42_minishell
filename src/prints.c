@@ -24,7 +24,7 @@ void	print_db_char(char **str)
 	for (int i = 0; str[i] != NULL; i++) {
 		ft_printf("str[%d]: %s;\n", i, str[i]);
 	}
-}*/
+}
 
 void	print_db(char **str)
 {
@@ -61,3 +61,4 @@ void	support_print(t_execlist *execl, int c)
 			printf("%d\n", execl->chunk[c]->app_dcs[i]);
 	}
 }
+*/

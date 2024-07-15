@@ -72,23 +72,17 @@ int	parse_central(t_execlist **execl, char *input, int *exit_stt, char ***env)
 	flag = 1;
 	if (flag == 1)
 		flag = pipe_chunks(execl, input, exit_stt, env);
-	//printf("p1 done with %d\n", flag);
 	if (flag == 1)
 		flag = redir_checker(*execl);
-	//printf("p2 done with %d\n", flag);
 	if (flag == 1)
 		flag = special_char(*execl);
-	//printf("p3 done with %d\n", flag);
 	if (flag == 1)
 		flag = scope_redirs(*execl);
-	//printf("p4 done with %d\n", flag);
 	if (flag == 1)
 		flag = arg_separator(*execl);
-	if (flag == 1) //
-		*exit_stt = 0; //
-	//printf("p5 done with %d\n", flag);
+	if (flag == 1)
+		*exit_stt = 0;
 	if (flag == 1)
 		flag = arg_id(*execl);
-	//printf("p6 done with %d\n", flag);
 	return (flag);
 }

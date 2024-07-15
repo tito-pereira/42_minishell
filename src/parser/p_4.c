@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_4.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:12:29 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/13 01:22:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/15 12:39:35 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,9 @@ void	temp_strings(char *og, char **new, int a, int b)
 	first = NULL;
 	if (a != 0)
 		first = ft_substr(og, 0, a);
-	/*if (first)
-		printf("first is '%s'\n", first);
-	else
-		printf("first is NULL\n");*/
 	secnd = NULL;
 	if (b <= (int)ft_strlen(og))
-	{
-		//printf("secnd will attempt substr\n");
 		secnd = ft_substr(og, b, ((int)ft_strlen(og) - b));
-	}
-	//printf("og '%s', b %d, strlen %d\n", og, b, ((int)ft_strlen(og)));
-	/*if (secnd)
-		printf("secnd is '%s'\n", secnd);
-	else
-		printf("secnd is NULL\n");*/
 	*new = NULL;
 	if (!first && secnd)
 		*new = secnd;
@@ -79,13 +67,10 @@ void	find_red_pos(t_chunk *chunk, int *i)
 	a = 0;
 	b = 0;
 	new = NULL;
-	//printf("find_red_pos: chunk->og[%d]: '%c'\n", *i, chunk->og[*i]);
 	if (chunk->og[*i] && (chunk->og[*i] == '<' || chunk->og[*i] == '>'))
 	{
 		find_redirs(chunk->og, &a, &b, i);
-		//printf("cut positions are from %d to %d\n", a, b);
 		temp_strings(chunk->og, &new, a, b);
-		//printf("new og is '%s'\n", new);
 		if (new)
 		{
 			free(chunk->og);
@@ -119,7 +104,6 @@ int	scope_redirs(t_execlist *execl)
 			if (flag == 0)
 				find_red_pos(execl->chunk[c], &i);
 		}
-		//printf("final chunk[%d]: '%s'\n", c, execl->chunk[c]->og);
 	}
 	return (1);
 }

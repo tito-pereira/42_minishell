@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:35:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/14 22:12:01 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/15 12:38:48 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ int	check_absolute(t_chunk *chunk)
 	int	i;
 
 	i = 0;
-	//printf("abso\n"); //
 	while (chunk->cmd_n_args && chunk->cmd_n_args[0]
 		&& chunk->cmd_n_args[0][i] && chunk->cmd_n_args[0][i] != '\0')
 		i++;
-	//printf("lute\n"); //
 	if ((i >= 1 && chunk->cmd_n_args[0][0] == '/')
 		|| (i >= 1 && chunk->cmd_n_args[0][0] == '~')
 		|| (i >= 2 && chunk->cmd_n_args[0][0] == '.'
@@ -48,24 +46,6 @@ int	check_builtin(char *arg)
 	return (0);
 }
 
-/*
-int	check_empty(t_execlist *execl, int i)
-{
-	printf("check empty %d\n", i);
-	printf("'%s'\n", execl->chunk[i]->cmd_n_args[0]);
-	if (execl->chunk[i]->cmd_n_args && execl->chunk[i]->cmd_n_args[0] == NULL)
-	{
-		ft_printf("'': invalid command\n", \
-		execl->chunk[i]->cmd_n_args[0]);
-		if (execl->chunk[i]->cmd_n_args)
-			free_db_str(execl->chunk[i]->cmd_n_args);
-		execl->chunk[i]->cmd_n_args = NULL;
-		*(execl->exit_stt) = 127;
-		return (0);
-	}
-	return (1);
-}*/
-
 void	check_p6_error(t_execlist *execl, int i, int r)
 {
 	if (r == 0)
@@ -76,11 +56,10 @@ void	check_p6_error(t_execlist *execl, int i, int r)
 		else
 			ft_printf("%s: invalid command\n", \
 			execl->chunk[i]->cmd_n_args[0]);
-		//if (execl->chunk[i]->infiles || execl->chunk[i]->outfiles)
 		if (execl->chunk[i]->cmd_n_args)
 			free_db_str(execl->chunk[i]->cmd_n_args);
 		execl->chunk[i]->cmd_n_args = NULL;
-		if (!execl->chunk[i + 1]) //more commands after
+		if (!execl->chunk[i + 1])
 			*(execl->exit_stt) = 127;
 	}
 }
@@ -91,14 +70,12 @@ int	arg_id(t_execlist *execl)
 	int	r;
 
 	i = -1;
-	//printf("inside p6\n"); //
-	//printf("cmd is actually '%s'\n", execl->chunk[0]->cmd_n_args[0]);
 	while (execl->chunk[++i] != NULL)
 	{
 		if (i == 0)
 			execl->chunk[i]->inpipe = 1;
-		if (execl->chunk[i] && !execl->chunk[i]->cmd_n_args) //|| (check_empty(execl, i) == 0))//
-			continue ; //
+		if (execl->chunk[i] && !execl->chunk[i]->cmd_n_args)
+			continue ;
 		if (check_absolute(execl->chunk[i]) == 0)
 		{
 			execl->chunk[i]->blt = \
@@ -107,38 +84,8 @@ int	arg_id(t_execlist *execl)
 				r = chunk_id(execl->chunk[i], 1, execl);
 			else if (execl->chunk[i]->blt == 0)
 				r = chunk_id(execl->chunk[i], 2, execl);
-			check_p6_error(execl, i, r); //if == 0, return 0
+			check_p6_error(execl, i, r);
 		}
 	}
 	return (1);
 }
-
-/*
-int	check_p6_error(t_execlist *execl, int i, int r)
-{
-	if (r == 128)
-	{
-		ft_printf("'': invalid command\n", \
-		execl->chunk[i]->cmd_n_args[0]);
-		if (execl->chunk[i]->cmd_n_args)
-			free_db_str(execl->chunk[i]->cmd_n_args);
-		execl->chunk[i]->cmd_n_args = NULL;
-		*(execl->exit_stt) = 127;
-	}
-	if (r == 0)
-	{
-		ft_printf("%s: invalid command\n", \
-		execl->chunk[i]->cmd_n_args[0]);
-		if (execl->chunk[i]->infiles || execl->chunk[i]->outfiles)
-		{
-			if (execl->chunk[i]->cmd_n_args)
-				free_db_str(execl->chunk[i]->cmd_n_args);
-			execl->chunk[i]->cmd_n_args = NULL;
-			return (1);
-		}
-		*(execl->exit_stt) = 127;
-		return (0);
-	}
-	return (1);
-}
-*/
