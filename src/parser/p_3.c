@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 15:38:37 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:22:13 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,20 @@ int	spec_char_chunk(t_execlist *execl, int j)
 	int	i;
 	int	flag;
 
-	i = -1;
+	i = 0;
 	flag = 1;
-	while (execl->chunk[j]->og[++i] != '\0')
+	while (execl->chunk[j]->og[i] != '\0')
 	{
 		if (execl->chunk[j]->og[i] == 39)
 			flag *= -1;
 		if (execl->chunk[j]->og[i] == '$' && flag == 1)
 		{
-			if (execl->chunk[j]->og[i + 1]
+			if (execl->chunk[j]->og[i + 1] != '\0'
 				&& execl->chunk[j]->og[i + 1] != 32 \
 				&& execl->chunk[j]->og[i + 1] != 34)
 				h_env_var(&i, &execl->chunk[j]->og, execl);
 		}
+		i++;
 	}
 	return (1);
 }

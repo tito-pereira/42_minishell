@@ -55,7 +55,7 @@ int	h_env_var(int *i, char **chunk, t_execlist *execl)
 	a = 0;
 	b = 0;
 	get_positions(&a, &b, i, *chunk);
-	spec = ft_strdup(get_spec(&a, &b, *chunk, execl));
+	spec = get_spec(&a, &b, *chunk, execl);
 	if (spec != NULL)
 		*chunk = new_chnk(spec, *chunk, a, b);
 	else
