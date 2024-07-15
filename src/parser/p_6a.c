@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_6a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:40:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/14 22:27:39 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/15 04:17:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,43 +35,45 @@ char	**find_execve(char *path, char *name)
 	env = NULL;
 	env = ft_calloc(8, sizeof(char *));
 	env[0] = ft_strdup("/usr/bin/find");
-	env[1] = ft_strdup(path);
+	if (path)
+		env[1] = ft_strdup(path);
 	env[2] = ft_strdup("-name");
-	env[3] = ft_strdup(name);
+	if (name)
+		env[3] = ft_strdup(name);
 	env[4] = ft_strdup("-type");
 	env[5] = ft_strdup("f");
 	env[6] = ft_strdup("-executable");
 	env[7] = NULL;
+	if (path)
+		free(path);
 	return (env);
 }
 
-/*
-find /usr/bin -name "command_name" -type f -executable
-find <path> -name <name> -type f -executable
-
-find /usr/bin -name ls -type f -executable
-/usr/bin/ls
-*/
+void	the_fork_help(t_execlist *execl, int *fd, char **env)
+{
+	int	dev_null;
+	
+	close (fd[0]);
+	dev_null = open("/dev/null", O_WRONLY);
+	dup2(dev_null, STDERR_FILENO);
+	close(dev_null);
+	dup2(fd[1], STDOUT_FILENO);
+	close (fd[1]);
+	execve(env[0], env, execl->my_envp[0]);
+}
 
 char	*get_path(char *name, char *path, t_execlist *execl)
 {
-	//char	*path;
 	char	**env;
 	int		*fd;
 	int		pid;
 
-	fd = malloc(2 * sizeof(int));
+	fd = (int *)ft_calloc(2, sizeof(int));
 	pipe(fd);
 	env = find_execve(path, name);
-	//print_db(execl->my_envp[0]);
 	pid = fork();
 	if (pid == 0)
-	{
-		close (fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		close (fd[1]);
-		execve(env[0], env, execl->my_envp[0]);
-	}
+		the_fork_help(execl, fd, env);
 	wait(0);
 	env = free_db_str(env);
 	close(fd[1]);
@@ -82,7 +84,19 @@ char	*get_path(char *name, char *path, t_execlist *execl)
 }
 
 /*
+dev_null_fd = open("/dev/null", O_WRONLY);
+dup2(dev_null_fd, STDERR_FILENO);
+close(dev_null_fd);
+
 free old path
+
+se nou couber aqui vai para a funcao de cima do env
+
+find /usr/bin -name "command_name" -type f -executable
+find <path> -name <name> -type f -executable
+
+find /usr/bin -name ls -type f -executable
+/usr/bin/ls
 */
 
 int	chunk_id(t_chunk *chunk, int opt, t_execlist *execl)

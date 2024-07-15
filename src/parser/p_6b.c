@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_6b.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 22:26:42 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/14 23:13:09 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/15 04:18:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*the_loop(t_execlist *execl, char *arg, int j, int *a)
 	i = 5;
 	*a = 5;
 	b = 0;
+	printf("the loop\n");
 	while (execl->my_envp[0][j][++i] && execl->my_envp[0][j][i] != '\0')
 	{
 		if (execl->my_envp[0][j][i] == ':')
@@ -54,10 +55,7 @@ char	*the_loop(t_execlist *execl, char *arg, int j, int *a)
 			path = ft_substr(execl->my_envp[0][j], *a, (b - *a));
 			path = get_path(arg, path, execl);
 			if (path != NULL)
-			{
-				path = rmv_newline(path);
 				return (path);
-			}
 			*a = b + 1;
 		}
 	}
@@ -72,18 +70,19 @@ char	*the_last(t_execlist *execl, char *arg, int j, int *a)
 	
 	i = 5;
 	b = 5;
-	while (execl->my_envp[0][j][++i] && execl->my_envp[0][j][i] != '\0')
+	printf("the last\n");
+	while (execl->my_envp[0][j][i] && execl->my_envp[0][j][i] != '\0')
+	{
+		i++;
 		b++;
-	if (*a != i)
+	}
+	if (*a < i)
 	{
 		b = i;
 		path = ft_substr(execl->my_envp[0][j], *a, (b - *a));
 		path = get_path(arg, path, execl);
 		if (path != NULL)
-		{
-			path = rmv_newline(path);
 			return (path);
-		}
 	}
 	return (NULL);
 }
@@ -97,12 +96,20 @@ char	*find_path(char	*arg, t_execlist *execl)
 	j = find_path_var(execl);
 	if (j == -1)
 		return (NULL);
+	printf("PATH is in index %d\n", j);
+	printf("PATH is %s\n", execl->my_envp[0][j]);
 	path = the_loop(execl, arg, j, &a);
 	if (path)
+	{
+		path = rmv_newline(path);
 		return (path);
+	}
 	path = the_last(execl, arg, j, &a);
 	if (path)
+	{
+		path = rmv_newline(path);
 		return (path);
+	}
 	return (NULL);
 }
 
