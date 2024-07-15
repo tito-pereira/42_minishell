@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:43:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 15:22:17 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/15 13:43:12 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_execlist	*free_exec(t_execlist *execl, int mode)
 	{
 		while (execl->chunk[++i])
 			execl->chunk[i] = free_chunk(execl->chunk[i]);
+		free(execl->chunk);
 	}
 	if (execl->my_envp && mode == 2)
 	{

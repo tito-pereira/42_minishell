@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:40:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/15 12:43:52 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/15 13:21:57 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,14 @@ char	**find_execve(char *path, char *name)
 	char	**env;
 
 	env = NULL;
-	env = ft_calloc(8, sizeof(char *));
+	env = ft_calloc(5, sizeof(char *));
 	env[0] = ft_strdup("/usr/bin/find");
 	if (path)
 		env[1] = ft_strdup(path);
 	env[2] = ft_strdup("-name");
 	if (name)
 		env[3] = ft_strdup(name);
-	env[4] = ft_strdup("-type");
-	env[5] = ft_strdup("f");
-	env[6] = ft_strdup("-executable");
-	env[7] = NULL;
+	env[4] = NULL;
 	if (path)
 		free(path);
 	return (env);

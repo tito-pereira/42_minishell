@@ -28,10 +28,9 @@ char	*empty_heredoc(int fd)
 		{
 			old = chest;
 			chest = ft_strjoin(chest, shovel);
-			free(shovel);
-			shovel = NULL;
 			free(old);
 		}
+		free(shovel);
 		shovel = get_next_line(fd);
 	}
 	close(fd);
