@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:40:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/22 10:58:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/22 17:38:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	the_fork_help(t_execlist *execl, int *fd, char **env)
 	dup2(fd[1], STDOUT_FILENO);
 	close (fd[1]);
 	execve(env[0], env, execl->my_envp[0]);
+	exit(0);
 }
 
 char	*get_path(char *name, char *path, t_execlist *execl)
