@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 10:40:52 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/05/07 14:10:16 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/23 00:54:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ int	f_strlen(char *str)
 	return (i);
 }
 
-/* F1
-um simples strlen
-*/
-
 int	ft_find_n(char *str)
 {
 	int	i;
@@ -39,11 +35,6 @@ int	ft_find_n(char *str)
 	}
 	return (-1);
 }
-
-/* F2
-dupla funcao, verificar se existe uma quebra
-e caso exista, retornar a sua posicao
-*/
 
 char	*f_substr(char *s, unsigned int start, size_t len)
 {
@@ -62,13 +53,13 @@ char	*f_substr(char *s, unsigned int start, size_t len)
 		len--;
 	}
 	substr[i] = '\0';
+	if (substr[0] == '\0')
+	{
+		free(substr);
+		substr = NULL;
+	}
 	return (substr);
 }
-
-/* F3
-um simples substr, a ser usado para criar loots a partir
-do chest que ja contenha quebras de linha
-*/
 
 char	*f_strdup(char *src)
 {
@@ -87,10 +78,6 @@ char	*f_strdup(char *src)
 	dest[i] = '\0';
 	return (dest);
 }
-
-/* F4
-um simples strdup, para retornar o ultimo loot
-*/
 
 char	*ft_new_chest(char *chest)
 {
@@ -117,9 +104,3 @@ char	*ft_new_chest(char *chest)
 	free (chest);
 	return (new);
 }
-
-/* F5
-complemento, faz um strchr do chest antigo
-mas evita leaks, fazendo malloc do novo
-e free do antigo
-*/

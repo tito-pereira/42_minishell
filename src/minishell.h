@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/22 10:56:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/23 01:18:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ int			*free_int_arr(int *str);
 char		**free_db_str(char **str);
 t_chunk		*free_chunk(t_chunk *chunk);
 t_execlist	*free_exec(t_execlist *execl, int mode);
+int			free_big_boys(t_execlist *execl, int **fd, char ***str, int ret);
 
 // BUILT-IN
 int			blt_central(t_execlist *execl, int i, char **exec_str);
