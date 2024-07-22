@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   e_action.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:39:10 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 10:41:58 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:00:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	input_end(int **fd, int **nfd, int i)
 {

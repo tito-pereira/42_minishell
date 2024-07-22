@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/15 12:52:36 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:56:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <termcap.h>
 # include <termios.h>
 # include <limits.h>
-# include "./mylib/mylib.h"
+# include "../mylib/mylib.h"
 
 # define ENV_VAR    __environ
 # define PROMPT		"\033[42;34m>> minishell: \033[0;37m"

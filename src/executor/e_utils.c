@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	write_heredoc(t_execlist *execl, int **fd, int i, int *nfd)
 {

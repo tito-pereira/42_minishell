@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_5.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:51:26 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/15 12:42:44 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:58:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 // (5) - commands && arguments separator by whitespaces + quotes handler
 

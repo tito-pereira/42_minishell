@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_6b.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 22:26:42 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/15 13:22:50 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:58:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 int	find_path_var(t_execlist *execl)
 {

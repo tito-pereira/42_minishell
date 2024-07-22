@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_3b.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:14:26 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 10:48:39 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:58:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 int	match_var(t_execlist *execl, int i, char *env_name)
 {

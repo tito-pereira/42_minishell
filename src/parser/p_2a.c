@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_2a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:40 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/11 10:50:57 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:57:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 int	check_delim_error(t_execlist *execl, char *delim)
 {

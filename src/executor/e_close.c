@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   e_close.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:30:22 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 17:13:02 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:59:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	close_non_related(t_execlist *execl, int **fd, int i)
 {

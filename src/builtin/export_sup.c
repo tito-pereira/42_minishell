@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_sup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:34:29 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/15 12:36:38 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:00:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	swap(char **a, char **b)
 {

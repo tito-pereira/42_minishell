@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   e_envs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:41:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 14:27:20 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:59:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	write_to_pipe(int fd, char ***envs)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_6.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:35:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/15 12:38:48 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:58:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 // (6) - builtin vs shell command identifier + absolute/relative paths handler
 

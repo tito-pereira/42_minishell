@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   blt_central.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:01:23 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/14 15:46:13 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:00:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 int	blt_central(t_execlist *execl, int i, char **exec_str)
 {

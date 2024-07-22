@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:34 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/15 12:44:03 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:57:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 // (2) - reads and stores redirections and filenames inside each chunk
 

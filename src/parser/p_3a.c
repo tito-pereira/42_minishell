@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_3a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 13:11:55 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/11 10:52:34 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:58:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 char	*chnk_conditions(char *spec, char *first, char *secnd)
 {

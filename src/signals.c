@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 void	check_mode_one(int mode, struct sigaction sa_repeat, \
 	struct sigaction sa_ign, struct sigaction sa_hd_repeat)

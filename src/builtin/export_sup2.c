@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_sup2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:49:47 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/15 12:52:48 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:00:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 int	check_exist(char **envp, char *var)
 {

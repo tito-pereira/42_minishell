@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:52:51 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/10 02:19:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/22 10:57:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	parser_quote_flags(char c, int *flag)
 {

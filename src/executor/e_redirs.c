@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   e_redirs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:29:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/15 12:45:32 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:59:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	get_ex_code(int *exit_code, char *str)
 {
