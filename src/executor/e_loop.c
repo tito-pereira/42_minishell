@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:38:06 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/07/23 01:21:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/25 14:52:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	exec_action(t_execlist *execl, int **fd, int i, char ***exec_str)
 			close(execl->env_pipe[1]);
 		}
 	}
-	exit(free_big_boys(execl, fd, exec_str, ret)); //
+	exit(free_big_boys(execl, fd, exec_str, ret));
 }
 
 int	exec_loop(t_execlist *execl, int **fd, char ***exec_str)
