@@ -56,8 +56,9 @@ void	exit_errors(t_execlist **execl, char **cmd)
 		*((*execl)->exit_stt) = 1;
 		return ;
 	}
-	ft_printf("minishell: exit: %s: Numeric argument required\n", cmd[1]);
-	*((*execl)->exit_stt) = 2;
+	ft_printf("exit\nminishell: exit: %s: Numeric argument required\n", cmd[1]);
+	free_exec(*execl, 2);
+	exit (2);
 }
 
 void	ft_exit(char **cmd, t_execlist **execl)

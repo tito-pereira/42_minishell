@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:44:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/07/25 14:35:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/25 17:39:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,32 +112,3 @@ int	special_char(t_execlist *execl)
 	}
 	return (1);
 }
-
-/*
-nenhuma spec char retorna 0, porque raio tenho estes if aqui assim?
-*/
-
-/*
-int	spec_char_chunk(t_execlist *execl, int j)
-{
-	int	i;
-	int	flag;
-
-	i = 0;
-	flag = 1;
-	while (execl->chunk[j]->og[i] != '\0')
-	{
-		if (execl->chunk[j]->og[i] == 39)
-			flag *= -1;
-		if (execl->chunk[j]->og[i] == '$' && flag == 1)
-		{
-			if (execl->chunk[j]->og[i + 1] != '\0'
-				&& execl->chunk[j]->og[i + 1] != 32 \
-				&& execl->chunk[j]->og[i + 1] != 34)
-				h_env_var(&i, &execl->chunk[j]->og, execl);
-		}
-		i++;
-	}
-	return (1);
-}
-*/
