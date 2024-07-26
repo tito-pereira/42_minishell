@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:15 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/22 11:00:58 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/26 21:19:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,30 @@ static int	valid_var(char *var)
 	return (ret);
 }
 
+int	exp_begin(char **cmd, char ***envp)
+{
+	if (!cmd[1])
+	{
+		print_sorted_env(envp[0]);
+		return (0);
+	}
+	else if (cmd[1] && cmd[1][0] && cmd[1][0] == '-')
+	{
+		ft_printf("minishell: export: options aren't supported\n");
+		return (0);
+	}
+	return (1);
+}
+
 int	ft_export(char **cmd, char ***envp)
 {
 	int	i;
 	int	var_pos;
 
-	i = 1;
-	if (!cmd[1])
-		print_sorted_env(envp[0]);
-	while (cmd[i])
+	i = 0;
+	if (exp_begin(cmd, envp) == 0)
+		return (0);
+	while (cmd[++i])
 	{
 		if (valid_var (cmd[i]) == 1)
 		{
@@ -98,7 +113,6 @@ int	ft_export(char **cmd, char ***envp)
 			ft_printf("minishell: export: %s: is not valid\n", cmd[i]);
 			return (1);
 		}
-		i++;
 	}
 	return (0);
 }
