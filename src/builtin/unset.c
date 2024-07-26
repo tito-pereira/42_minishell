@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:06:19 by rlima-fe          #+#    #+#             */
-/*   Updated: 2024/07/26 21:17:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/26 21:20:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_unset(char **cmd, char ***envp)
 
 	if (cmd[1] && cmd[1][0] && cmd[1][0] == '-')
 	{
-    	ft_printf("minishell: unset: options aren't supported\n");
+		ft_printf("minishell: unset: options aren't supported\n");
 		return ;
 	}
 	i = 0;
