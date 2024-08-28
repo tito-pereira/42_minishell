@@ -3,22 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 17:44:12 by marvin            #+#    #+#              #
-#    Updated: 2024/07/15 12:51:37 by tibarbos         ###   ########.fr        #
+#    Updated: 2024/08/28 13:24:32 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Name && Utilities
 NAME= minishell
-RM= rm -rf
 
-# Compiler && Flags
+# Compilation && Tools
 CC= cc
 CFLAGS= -Wall -Wextra -Werror
+RM= rm -rf
+
+# Output colors
+RED= \e[31m
+GREEN= \e[32m
+BLUE= \e[34m
+WHITE= \e[37m
 
 # Source && Object Files
+OBJDIR= ./obj
+
 SRC_P= ./src/parser/p_1.c ./src/parser/p_1a.c \
 	./src/parser/p_2.c ./src/parser/p_2a.c ./src/parser/p_2b.c \
 	./src/parser/p_2c.c ./src/parser/p_2d.c \
@@ -28,25 +36,25 @@ SRC_P= ./src/parser/p_1.c ./src/parser/p_1a.c \
 	./src/parser/p_4.c \
 	./src/parser/p_5.c ./src/parser/p_5a.c \
 	./src/parser/p_6.c ./src/parser/p_6a.c ./src/parser/p_6b.c
-OBJ_P= ${SRC_P:.c=.o}
+OBJ_P= $(SRC_P:%.c=$(OBJDIR)/%.o)
 
 SRC_E= ./src/executor/e_main.c ./src/executor/e_loop.c \
 	./src/executor/e_action.c ./src/executor/e_close.c \
 	./src/executor/e_envs.c ./src/executor/e_redirs.c \
 	./src/executor/e_utils.c ./src/executor/e_launch.c
-OBJ_E= ${SRC_E:.c=.o}
+OBJ_E= $(SRC_E:%.c=$(OBJDIR)/%.o)
 
 SRC_B= ./src/builtin/blt_central.c ./src/builtin/cd.c \
 	./src/builtin/echo.c ./src/builtin/env.c \
 	./src/builtin/export.c \
 	./src/builtin/pwd.c ./src/builtin/unset.c \
 	./src/builtin/export_sup.c ./src/builtin/export_sup2.c
-OBJ_B= ${SRC_B:.c=.o}
+OBJ_B= $(SRC_B:%.c=$(OBJDIR)/%.o)
 
 SRC_M= ./src/free.c ./src/signals.c ./src/main.c \
 	./src/prints.c ./src/exit_mini.c ./src/sighandlers.c \
 	./src/main_sup.c
-OBJ_M= ${SRC_M:.c=.o}
+OBJ_M= $(SRC_M:%.c=$(OBJDIR)/%.o)
 
 OBJ= $(OBJ_P) $(OBJ_E) $(OBJ_B) $(OBJ_M)
 
@@ -56,23 +64,32 @@ LIB_READ= -lreadline
 LIBS= $(LIB_FT) $(LIB_READ)
 
 # Rules
+.PHONY: all clean fclean re test
+
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 $(NAME): $(OBJ)
-	@cd ./mylib && make
+	@make -C mylib
 	@$(CC) -g -v $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
+	@echo "$(BLUE)minishell: $(GREEN)program compiled$(WHITE)"
 
 all: $(NAME)
 	@cd ./mylib && make all
 
 clean:
-	@cd ./mylib && make clean
-	@$(RM) $(OBJ)
+	@make -C mylib clean
+	@$(RM) $(OBJDIR)
+	@echo "$(BLUE)minishell: $(RED)object files removed$(WHITE)"
 
 fclean:	clean
-	@cd ./mylib && make fclean
+	@make -C mylib fclean
 	@$(RM) $(NAME)
+	@echo "$(BLUE)minishell: $(RED)program and object files removed$(WHITE)"
 
 re: fclean all
-	@cd ./mylib && make re
+	@make -C mylib re
 
 test: re
 	@make clean

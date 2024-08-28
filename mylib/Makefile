@@ -3,19 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 14:55:08 by tibarbos          #+#    #+#              #
-#    Updated: 2023/10/26 15:39:19 by tibarbos         ###   ########.fr        #
+#    Updated: 2024/08/28 12:34:37 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= libft.a
+
+# Compilation && Tools
 CC= cc -c
 AR= ar -rcs
 CFLAGS= -Wall -Wextra -Werror
 RM= rm -rf
 
+# Output colors
+RED= \e[31m
+GREEN= \e[32m
+BLUE= \e[34m
+WHITE= \e[37m
+
+# Source && Object Files
 SRCL= ./lib/ft_atoi.c ./lib/ft_bzero.c ./lib/ft_calloc.c \
 	./lib/ft_isalnum.c ./lib/ft_isalpha.c ./lib/ft_isascii.c \
 	./lib/ft_isdigit.c ./lib/ft_isprint.c ./lib/ft_itoa.c \
@@ -47,20 +56,28 @@ SRCP= ./print/central.c ./print/death_star.c \
 	./print/ft_itoa.c ./print/ft_long_itoa.c ./print/ft_hbx_itoa.c \
 	./print/ft_hx_itoa.c ./print/ft_lhx_itoa.c
 
-OBJL= ${SRCL:.c=.o}
-OBJG= ${SRCG:.c=.o}
-OBJP= ${SRCP:.c=.o}
+OBJDIR= ./obj
+OBJL= $(SRCL:%.c=$(OBJDIR)/%.o)
+OBJG= $(SRCG:%.c=$(OBJDIR)/%.o)
+OBJP= $(SRCP:%.c=$(OBJDIR)/%.o)
 AOBJ= $(OBJL) $(OBJG) $(OBJP)
+
+# Rules
+.PHONY: all clean fclean re
+
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(AOBJ)
+	@$(AR) $(NAME) $(AOBJ)
 
 all: $(NAME)
 
-$(NAME): $(AOBJ)
-	$(AR) $(NAME) $(AOBJ)
-
 clean:
-	$(RM) $(AOBJ)
+	@$(RM) $(OBJDIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
